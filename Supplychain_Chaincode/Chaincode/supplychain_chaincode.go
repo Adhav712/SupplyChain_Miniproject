@@ -1,5 +1,5 @@
 
-package main
+package chaincode
 
 import (
 	"log"

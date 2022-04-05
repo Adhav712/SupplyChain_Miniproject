@@ -8,7 +8,6 @@ import (
 	"log"
 
 	"github.com/hyperledger/fabric-contract-api-go/contractapi"
-	"github.com/hyperledger/SupplyChain_Miniproject/Supplychain_Chaincode"
 )
 
 func main() {
