@@ -52,6 +52,7 @@ services:
       - peer0.org5.example.com:/var/hyperledger/production
       
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
+    
     command: peer node start
     ports:
       - 13051:13051
