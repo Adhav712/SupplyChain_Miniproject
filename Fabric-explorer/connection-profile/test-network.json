@@ -1,0 +1,48 @@
+{
+	"name": "chaincare-network-hosp1apollo",
+	"version": "1.0.0",
+	"client": {
+		"tlsEnable": true,
+		"adminCredential": {
+			"id": "exploreradmin",
+			"password": "exploreradminpw"
+		},
+		"enableAuthentication": true,
+		"organization": "hosp1apollo",
+		"connection": {
+			"timeout": {
+				"peer": {
+					"endorser": "300"
+				},
+				"orderer": "300"
+			}
+		}
+	},
+	"channels": {
+		"hospitalchannel": {
+			"peers": {
+				"peer0.hosp1apollo.chaincare.com": {}
+			}
+		}
+	},
+	"organizations": {
+		"hosp1apollo": {
+			"mspid": "hosp1apolloMSP",
+			"adminPrivateKey": {
+				"path": "/tmp/crypto/peerOrganizations/hosp1apollo.chaincare.com/users/User1@hosp1apollo.chaincare.com/msp/keystore/750216694fca5d461e09452c8c18623e3991541febd9fe03e7934f9740e650c9_sk"
+			},
+			"peers": ["peer0.hosp1apollo.chaincare.com"],
+			"signedCert": {
+				"path": "/tmp/crypto/peerOrganizations/hosp1apollo.chaincare.com/users/User1@hosp1apollo.chaincare.com/msp/signcerts/cert.pem"
+			}
+		}
+	},
+	"peers": {
+		"peer0.hosp1apollo.chaincare.com": {
+			"tlsCACerts": {
+				"path": "/tmp/crypto/peerOrganizations/hosp1apollo.chaincare.com/peers/peer0.hosp1apollo.chaincare.com/tls/ca.crt"
+			},
+			"url": "grpcs://peer0.hosp1apollo.chaincare.com:7051"
+		}
+	}
+}

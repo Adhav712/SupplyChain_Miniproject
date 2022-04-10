@@ -9,3 +9,8 @@ docker system prune -f
 cd addOrg3
 
 ./addOrg3.sh up -ca -s couchdb
+
+
+cd ..
+
+./network.sh deployCC -ccn Supplychain_Contract -ccv 1 -cci InitLedger -ccp ../chaincode/Supplychain_Chaincode -ccl javascript
