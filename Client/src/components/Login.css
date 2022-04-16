@@ -14,7 +14,7 @@ html{
   font-size: 100%;
 } */
 
-#loginform{
+/* #loginform{
   max-width: 500px;
   min-width: 300px;
   max-height: 700px;
@@ -23,6 +23,17 @@ html{
   margin: 100px auto;
   background-color: #FFFFFF;
   border-radius: 25px;
+} */
+
+#loginform{
+  max-width: 35%;
+  min-width: 20%;
+  max-height: 100%;
+  width: 95%;
+  height: 60%;
+  margin: 100px auto;
+  background-color: #f4f5fa;
+  border-radius: 15px;
 }
 
 #headerTitle{
