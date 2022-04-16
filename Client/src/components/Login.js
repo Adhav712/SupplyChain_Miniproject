@@ -1,12 +1,13 @@
 import React from "react";
 import "./Login.css";
+import { useNavigate  } from 'react-router-dom';
 
 export default function Login() {
-  //const history = useHistory();
+  let navigate = useNavigate();
     return(
       
       <div className="general">
-      <div id="loginform">
+      <div id="loginform1">
         <h2 id="headerTitle">Login</h2>
         <div id="drop" class="rows">
           <select>
@@ -18,8 +19,8 @@ export default function Login() {
         </div>
         <div className="row"><input type="email" placeholder="Enter your email" /> </div>
         <div className="row"><input type="password" placeholder="Enter your password"/> </div>
-          <div id="button" class="row"> 
-            <button>Login</button>
+          <div  id="button" class="row"> 
+            <button onClick={()=>navigate('OrgPage')}>Login</button>
           </div>
         
       </div>

@@ -8,13 +8,14 @@ body{
 .general{
   height: 690px;
   font-family: "work sans";
+  
 }
 /* 
 html{
   font-size: 100%;
 } */
 
-#loginform{
+#loginform1{
   max-width: 500px;
   min-width: 300px;
   max-height: 700px;
