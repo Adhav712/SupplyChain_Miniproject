@@ -1,12 +1,14 @@
 
-import Login from "./components/Login";
+//import Login from "./components/Login";
+import Querry from "./components/Querry";
 
 
 
 function App() {
   return (
       <div>
-          <Login/>
+          {/* <Login/> */}
+          <Querry/>
       </div>
   )
 }
