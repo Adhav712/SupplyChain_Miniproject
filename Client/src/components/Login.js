@@ -2,6 +2,7 @@ import React from "react";
 import "./Login.css";
 import { useState } from 'react';
 import { useNavigate  } from 'react-router-dom';
+import Query from "./Query";
 
 export default function Login() {
   let navigate = useNavigate();
@@ -40,7 +41,6 @@ export default function Login() {
           </div>
         
       </div>
-
       </div>
       )
   }

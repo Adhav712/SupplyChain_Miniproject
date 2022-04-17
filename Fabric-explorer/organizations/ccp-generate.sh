@@ -26,20 +26,38 @@ function yaml_ccp {
         organizations/ccp-template.yaml | sed -e $'s/\\\\n/\\\n          /g'
 }
 
-ORG=1apollo
+ORG=1
 P0PORT=7051
 CAPORT=7054
-PEERPEM=organizations/peerOrganizations/hosp1apollo.chaincare.com/tlsca/tlsca.hosp1apollo.chaincare.com-cert.pem
-CAPEM=organizations/peerOrganizations/hosp1apollo.chaincare.com/ca/ca.hosp1apollo.chaincare.com-cert.pem
+PEERPEM=organizations/peerOrganizations/org1.example.com/tlsca/tlsca.org1.example.com-cert.pem
+CAPEM=organizations/peerOrganizations/org1.example.com/ca/ca.org1.example.com-cert.pem
 
-echo "$(json_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM)" > organizations/peerOrganizations/hosp1apollo.chaincare.com/connection-hosp1apollo.json
-echo "$(yaml_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM)" > organizations/peerOrganizations/hosp1apollo.chaincare.com/connection-hosp1apollo.yaml
+echo "$(json_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM)" > organizations/peerOrganizations/org1.example.com/connection-org1.json
+echo "$(yaml_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM)" > organizations/peerOrganizations/org1.example.com/connection-org1.yaml
 
-ORG=2vijaya
+ORG=2
 P0PORT=9051
 CAPORT=8054
-PEERPEM=organizations/peerOrganizations/hosp2vijaya.chaincare.com/tlsca/tlsca.hosp2vijaya.chaincare.com-cert.pem
-CAPEM=organizations/peerOrganizations/hosp2vijaya.chaincare.com/ca/ca.hosp2vijaya.chaincare.com-cert.pem
+PEERPEM=organizations/peerOrganizations/org2.example.com/tlsca/tlsca.org2.example.com-cert.pem
+CAPEM=organizations/peerOrganizations/org2.example.com/ca/ca.org2.example.com-cert.pem
 
-echo "$(json_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM)" > organizations/peerOrganizations/hosp2vijaya.chaincare.com/connection-hosp2vijaya.json
-echo "$(yaml_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM)" > organizations/peerOrganizations/hosp2vijaya.chaincare.com/connection-hosp2vijaya.yaml
+echo "$(json_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM)" > organizations/peerOrganizations/org2.example.com/connection-org2.json
+echo "$(yaml_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM)" > organizations/peerOrganizations/org2.example.com/connection-org2.yaml
+
+ORG=3
+P0PORT=11051
+CAPORT=11054
+PEERPEM=organizations/peerOrganizations/org3.example.com/tlsca/tlsca.org3.example.com-cert.pem
+CAPEM=organizations/peerOrganizations/org3.example.com/ca/ca.org3.example.com-cert.pem
+
+echo "$(json_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM)" > organizations/peerOrganizations/org3.example.com/connection-org3.json
+echo "$(yaml_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM)" > organizations/peerOrganizations/org3.example.com/connection-org3.yaml
+
+ORG=4
+P0PORT=12051
+CAPORT=12054
+PEERPEM=organizations/peerOrganizations/org4.example.com/tlsca/tlsca.org4.example.com-cert.pem
+CAPEM=organizations/peerOrganizations/org4.example.com/ca/ca.org4.example.com-cert.pem
+
+echo "$(json_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM)" > organizations/peerOrganizations/org4.example.com/connection-org4.json
+echo "$(yaml_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM)" > organizations/peerOrganizations/org4.example.com/connection-org4.yaml

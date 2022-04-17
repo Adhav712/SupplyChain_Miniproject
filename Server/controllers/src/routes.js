@@ -18,8 +18,8 @@ exports.uploadBill = async (req, res, org, AdminID) => {
         if (uploadBillRes.error) {
             res.status(400).send(response.error);
           }
-
-  res.status(201).send(`Successfully Uploaded Bill For: ${prettyJSONString(req.body.ID)}`);
+  console.log(`Bill is Uploaded by ${ID} the result is ${uploadBillRes.toString()}`);          
+  res.status(201).send(`${prettyJSONString(uploadBillRes)}`);
 };
 
 //------------------------Admin Query Transcations-----------------------

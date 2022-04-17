@@ -20,7 +20,7 @@ node_modules/
 build
 package-lock.json
 external-chaincode/
-
+Fabric-explorer/organizations/
 # Eclipse
 .classpath
 .settings

@@ -1,5 +1,5 @@
 {
-	"name": "chaincare-network-hosp1apollo",
+	"name": "test-network",
 	"version": "1.0.0",
 	"client": {
 		"tlsEnable": true,
@@ -8,7 +8,7 @@
 			"password": "exploreradminpw"
 		},
 		"enableAuthentication": true,
-		"organization": "hosp1apollo",
+		"organization": "Org1MSP",
 		"connection": {
 			"timeout": {
 				"peer": {
@@ -19,30 +19,30 @@
 		}
 	},
 	"channels": {
-		"hospitalchannel": {
+		"mychannel": {
 			"peers": {
-				"peer0.hosp1apollo.chaincare.com": {}
+				"peer0.org1.example.com": {}
 			}
 		}
 	},
 	"organizations": {
-		"hosp1apollo": {
-			"mspid": "hosp1apolloMSP",
+		"Org1MSP": {
+			"mspid": "Org1MSP",
 			"adminPrivateKey": {
-				"path": "/tmp/crypto/peerOrganizations/hosp1apollo.chaincare.com/users/User1@hosp1apollo.chaincare.com/msp/keystore/750216694fca5d461e09452c8c18623e3991541febd9fe03e7934f9740e650c9_sk"
+				"path": "/tmp/crypto/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/8f630097ab8df1bd98e991dfdca966750886902393dc38c25aab552406fbfff9_sk"
 			},
-			"peers": ["peer0.hosp1apollo.chaincare.com"],
+			"peers": ["peer0.org1.example.com"],
 			"signedCert": {
-				"path": "/tmp/crypto/peerOrganizations/hosp1apollo.chaincare.com/users/User1@hosp1apollo.chaincare.com/msp/signcerts/cert.pem"
+				"path": "/tmp/crypto/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/cert.pem"
 			}
 		}
 	},
 	"peers": {
-		"peer0.hosp1apollo.chaincare.com": {
+		"peer0.org1.example.com": {
 			"tlsCACerts": {
-				"path": "/tmp/crypto/peerOrganizations/hosp1apollo.chaincare.com/peers/peer0.hosp1apollo.chaincare.com/tls/ca.crt"
+				"path": "/tmp/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt"
 			},
-			"url": "grpcs://peer0.hosp1apollo.chaincare.com:7051"
+			"url": "grpcs://peer0.org1.example.com:7051"
 		}
 	}
 }

@@ -4,10 +4,7 @@ const port = 3000;
 const cors = require('cors');
 
 const adminRoutes = require('./controllers/src/routes.js');
-const doctorRoutes = require('./controllers/src/doctor-routes.js');
-const patientRoutes = require('./controllers/src/patient-routes.js');
-const insuranceRoutes = require('./controllers/src/insurance-routes.js');
-const privateRoutes = require('./controllers/src/private-routes.js');
+
 
 const auth = require('./controllers/Utils/login.js');
 
@@ -49,7 +46,7 @@ async function main() {
         return isLoggedIn;
     })
 
-    uploadBill = async (req, res, org, AdminID) => {
+    uploadBill = async (req, res, org, AdminID,func) => {
         if(func == "uploadBill"){
             adminRoutes.uploadBill(req,res,org,AdminID);
         }else{

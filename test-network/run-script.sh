@@ -18,3 +18,24 @@ cd ..
 cd ../Server/controllers/wallet
 
 rm *.id
+
+cd  ../../../Fabric-explorer
+${PWD}
+
+rm -rf organizations
+
+cd ../test-network
+${PWD}
+
+cp -r ${PWD}/organizations  ${PWD}/../Fabric-explorer/
+
+cd ../Fabric-explorer
+${PWD}
+
+docker volume prune -f
+
+docker system prune -f
+
+echo "Remainder change the private key value in the test-network.json file and run this command docker-compose up -d"
+
+docker-compose down
