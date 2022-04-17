@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "fabric-ca-client": "^2.2.4",
+    "fabric-network": "^2.2.4"
+  },
+  "scripts": {
+    "start": "nodemon server.js",
+    "prestart": "node initServer.js"
+
+
+  },
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Server sides files of chaincare project",
+  "main": "server.js",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "author": "",
+  "license": "ISC"
+}

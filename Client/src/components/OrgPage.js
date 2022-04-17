@@ -14,7 +14,7 @@ export default function OrgPage() {
         <h2 id="headerTitle">Organisation Page</h2>
         <div class="nav1">
             <div className="nav">
-                <button class="button-62" onClick={()=>navigate('Querry')}>Querry Bill</button>
+                <button class="button-62" onClick={()=>navigate('Query')}>Query Bill</button>
             </div>
             <div className="nav">
                 <button class="button-62" onClick={()=>navigate('')}>View History</button>

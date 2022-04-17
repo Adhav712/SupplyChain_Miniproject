@@ -52,26 +52,37 @@ class Supplychain_Contract extends Contract {
     }
 
     // CreateAsset issues a new asset to the world state with given details.
-    async UploadBill(ctx, id, ProductId, Comments ,receipt) {
-        const exists = await this.BillExists(ctx, id);
+    async UploadBill(ctx, ID, ProductId, Comments ,receipt) {
+        const exists = await this.BillExists(ctx, ID);
         if (exists) {
-            throw new Error(`The Bill ${id} already exists`);
+            throw new Error(`The Bill ${ID} already exists`);
         }
 
         const bill = {
-            ID: id,
+            ID: ID,
             ProductId: ProductId,
             Comments: Comments,
             billReceipt: receipt,
         };
         //we insert data in alphabetic order using 'json-stringify-deterministic' and 'sort-keys-recursive'
-        await ctx.stub.putState(id, Buffer.from(stringify(sortKeysRecursive(bill))));
+        await ctx.stub.putState(ID, Buffer.from(stringify(sortKeysRecursive(bill))));
         return JSON.stringify(bill);
     }
 
-    async BillExists(ctx, id) {
-        const billJSON = await ctx.stub.getState(id);
+    async BillExists(ctx, ID) {
+        const billJSON = await ctx.stub.getState(ID);
         return billJSON && billJSON.length > 0;
+    }
+
+
+    async readBill(ctx, ID) {
+        const exists = await this.BillExists(ctx, ID);
+        if (!exists) {
+            throw new Error(`The patient ${ID} does not exist`);
+        }
+        const buffer = await ctx.stub.getState(ID);
+        const asset = JSON.parse(buffer.toString());
+        return asset;
     }
 }
 

@@ -1,5 +1,5 @@
 import Login from "./components/Login";
-import Querry from "./components/Querry";
+import Query from "./components/Query";
 import UploadBill from "./components/UploadBill"
 import { BrowserRouter, Route,Routes } from "react-router-dom";
 import OrgPage from "./components/OrgPage";
@@ -12,9 +12,10 @@ function App() {
       <div>
         <Routes>
           <Route path="/" element={<Login/>} />
-          <Route path="/OrgPage/Querry" element={<Querry/>} /> 
-          <Route path="/OrgPage/UploadBill" element={<UploadBill/>} />
-          <Route path="/OrgPage" element={<OrgPage/>} />  
+          <Route path="/:org" element={<OrgPage/>} />
+          <Route path="/:org/Query" element={<Query/>} /> 
+          <Route path="/:org/UploadBill" element={<UploadBill/>} />
+            
         </Routes>
         
       </div>

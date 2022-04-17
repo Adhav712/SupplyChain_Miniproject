@@ -123,6 +123,7 @@ html{
   /* background: linear-gradient(90deg, rgba(34,193,195,1) 0%,     rgba(253,187,45,1) 100%); */
   /* background: rgb(34,193,195); */
   border: 3px;
+  padding-left: 5px;
   cursor: pointer;
   transition: opacity 0.25s ease-out;
 }

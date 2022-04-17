@@ -363,6 +363,11 @@ function networkDown() {
     ${CONTAINER_CLI} run --rm -v "$(pwd):/data" busybox sh -c 'cd /data && rm -rf addOrg3/fabric-ca/org5/msp addOrg3/fabric-ca/org5/tls-cert.pem addOrg3/fabric-ca/org5/ca-cert.pem addOrg3/fabric-ca/org5/IssuerPublicKey addOrg3/fabric-ca/org5/IssuerRevocationPublicKey addOrg3/fabric-ca/org5/fabric-ca-server.db'
     # remove channel and script artifacts
     ${CONTAINER_CLI} run --rm -v "$(pwd):/data" busybox sh -c 'cd /data && rm -rf channel-artifacts log.txt *.tar.gz'
+
+    echo ${PWD}
+    cd ../Server/controllers/wallet
+    echo ${PWD}
+    rm *.id
   
 
   fi

@@ -14,3 +14,7 @@ cd addOrg3
 cd ..
 
 ./network.sh deployCC -ccn Supplychain_Contract -ccv 1 -cci InitLedger -ccp ../chaincode/Supplychain_Chaincode -ccl javascript
+
+cd ../Server/controllers/wallet
+
+rm *.id
