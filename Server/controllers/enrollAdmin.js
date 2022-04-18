@@ -30,9 +30,9 @@ const Distributor = 'Distributor_Admin';
 const DistributorPasswd = 'Distributor_Adminpw';
 const DistributorMSP = 'Org4MSP';
 
-const Retailor = 'Retailor_Admin';
-const RetailorPasswd = 'Retailor_Adminpw';
-const RetailorMSP = 'Org5MSP';
+const Retailer = 'Retailer_Admin';
+const RetailerPasswd = 'Retailer_Adminpw';
+const RetailerMSP = 'Org5MSP';
 
 exports.enrollAdminOrg1 = async function() {
   try {
@@ -136,11 +136,11 @@ exports.enrollAdminOrg2 = async function() {
       const wallet = await buildWallet(Wallets, walletPath);
   
       // to be executed and only once per hospital. Which enrolls admin and creates admin in the wallet
-      await enrollAdmin(caClient, wallet, RetailorMSP, Retailor, RetailorPasswd);
+      await enrollAdmin(caClient, wallet, RetailerMSP, Retailer, RetailerPasswd);
   
-      console.log('msg: Successfully enrolled admin user ' + Retailor + ' and imported it into the wallet');
+      console.log('msg: Successfully enrolled admin user ' + Retailer + ' and imported it into the wallet');
     } catch (error) {
-      console.error(`Failed to enroll admin user ' + ${Retailor} + : ${error}`);
+      console.error(`Failed to enroll admin user ' + ${Retailer} + : ${error}`);
       process.exit(1);
     }
   };

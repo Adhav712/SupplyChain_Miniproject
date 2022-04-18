@@ -2,15 +2,14 @@ import React from "react";
 import "./UploadBill.css";
 import { useNavigate } from 'react-router-dom';
 import { useState } from "react";
+import useStore from "./store";
+
 
 export default function Login() {
   let navigate = useNavigate();
-  // const [result,setresult] = useState({
-  //   Comments:"",
-  //   ID:"",
-  //   ProductId:"",
-  //   billReceipt:"",
-  // });  
+
+  const Organization = useStore(state => state.org); 
+
   const [Comments,setComments] = useState("");
   const [ID,setID] = useState("");
   const [ProductId,setProductId] = useState("");
@@ -22,12 +21,13 @@ export default function Login() {
     console.log("result",ProductId);
     console.log("result",billReceipt);
 
-    const fetchs = await fetch(`https://3000-adhav712-supplychainmini-v2xgy2x4yp4.ws-us40.gitpod.io/Producer`,{
+    //const fetchs = await fetch(`https://3000-adhav712-supplychainmini-v2xgy2x4yp4.ws-us40.gitpod.io/${Organization}`,{
+    const fetchs = await fetch(`http://localhost:3000/${Organization}`,{
        method: 'post',
        headers:{'Content-Type':'application/json'},
        body: JSON.stringify({
-         org : "Producer",
-         AdminID: "Producer_Admin",
+         org : Organization,
+         AdminID: `${Organization}_Admin`,
          func: "uploadBill",
          ID : ID,
          ProductId: ProductId,
@@ -37,6 +37,11 @@ export default function Login() {
      })
  
      const data = await fetchs.json();
+     if (data.ID === ID) {
+        alert("Bill Uploaded Successfully"); 
+     }else{
+        alert("Bill Upload Failed");
+     };
      console.log(data);
    }
 

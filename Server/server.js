@@ -83,7 +83,7 @@ async function main() {
         uploadBill(req,res,org,AdminID,func);
     })
 
-    app.post('/Retailor',(req,res) =>{
+    app.post('/Retailer',(req,res) =>{
         const func = req.body.func;
         const org = req.body.org;   
         const AdminID = req.body.AdminID;

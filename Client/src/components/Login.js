@@ -1,13 +1,13 @@
 import React from "react";
 import "./Login.css";
-import { useState } from 'react';
 import { useNavigate  } from 'react-router-dom';
-import Query from "./Query";
+import useStore from "./store";
+
 
 export default function Login() {
   let navigate = useNavigate();
-  
-  const [org,setorg] = useState("");
+
+  const SelectedOrg = useStore((state) => state.SelectedOrg);
   let data;
   
   return(
@@ -29,19 +29,14 @@ export default function Login() {
           <div  id="button" class="row"> 
             <button 
             onClick={() => {
-              setorg(data)
+              SelectedOrg(data)
               console.log("data",data)
-              console.log("org",org)
               navigate('OrgPage')
-            }}
-              
-            
-            // onClick={()=>navigate('OrgPage')}
-            >Login</button>
+            }}>Login</button>
           </div>
         
       </div>
-      </div>
+      </div>  
       )
   }
   

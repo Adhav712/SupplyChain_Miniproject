@@ -2,12 +2,15 @@ import React from "react";
 import "./Query.css";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import Login from "./Login";
+// import {OrgContext} from "./Login";
+import useStore from "./store";
+
 
 export default function Query() {
-  
+
   let navigate = useNavigate();
-  // const [Producer,setProducer] = Login();
+  const Organization = useStore(state => state.org);
+
   const [ID,setID] = useState("");
   const [result,setresult] = useState({
     Comments:"",
@@ -18,13 +21,14 @@ export default function Query() {
   });
 
   const onSubmitquery = async()=>{
-    // console.log("result",props.datas);
-   const fetchs = await fetch(`https://3000-adhav712-supplychainmini-v2xgy2x4yp4.ws-us40.gitpod.io/Producer/queries`,{
+    // console.log("result",Organization);
+  //  const fetchs = await fetch(`https://3000-adhav712-supplychainmini-v2xgy2x4yp4.ws-us40.gitpod.io/${Organization}/queries`,{
+    const fetchs = await fetch(`http://localhost:3000/${Organization}/queries`,{
       method: 'post',
       headers:{'Content-Type':'application/json'},
       body: JSON.stringify({
-        org : "Producer",
-        AdminID: "Producer_Admin",
+        org : Organization,
+        AdminID: `${Organization}_Admin`,
         queryName  : "readBill",
         ID : ID
       })
