@@ -19,7 +19,7 @@ export default function Query() {
 
   const onSubmitquery = async()=>{
     // console.log("result",props.datas);
-   const fetchs = await fetch(`http://localhost:3000/Producer/queries`,{
+   const fetchs = await fetch(`https://3000-adhav712-supplychainmini-v2xgy2x4yp4.ws-us40.gitpod.io/Producer/queries`,{
       method: 'post',
       headers:{'Content-Type':'application/json'},
       body: JSON.stringify({

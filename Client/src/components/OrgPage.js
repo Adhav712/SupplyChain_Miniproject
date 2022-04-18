@@ -17,7 +17,7 @@ export default function OrgPage() {
                 <button class="button-62" onClick={()=>navigate('Query')}>Query Bill</button>
             </div>
             <div className="nav">
-                <button class="button-62" ><a href= {`http://localhost:8080/#/`} target="_blank" id="button-62-link">View History</a></button>
+                <button class="button-62" ><a href= {`https://8080-adhav712-supplychainmini-v2xgy2x4yp4.ws-us40.gitpod.io/#/`} target="_blank" id="button-62-link">View History</a></button>
             </div>
         </div>
         <div id="loginformOrg">

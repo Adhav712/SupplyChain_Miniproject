@@ -21,5 +21,6 @@ build
 package-lock.json
 external-chaincode/
 # Eclipse
+Fabric-explorer/organizations/
 .classpath
 .settings
