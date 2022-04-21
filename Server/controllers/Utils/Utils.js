@@ -100,7 +100,7 @@ exports.buildCCPOrg5 = () => {
    } else {
      wallet = await Wallets.newInMemoryWallet();
      console.log('Built an in memory wallet');
-   }
+   }  
  
    return wallet;
  };

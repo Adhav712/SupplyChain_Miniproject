@@ -39,7 +39,7 @@ exports.AdminBill_query = async(req,res,org,AdminID) => {
       console.log(`Transaction has been evaluated, result is: ${response.toString()}`);
       
       if(response.toString() == `The Bill ID: ${ID} does not exist`){
-        res.status(400).send(`The Bill ID: ${ID} does not exist`);
+        res.status(201).send(response.toString());
       }else{
         res.status(201).send(`${prettyJSONString(response)}`);
       }

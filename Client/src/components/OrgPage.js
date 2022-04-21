@@ -11,13 +11,7 @@ export default function OrgPage() {
   
 
   const [ID,setID] = useState("");
-  const [result,setresult] = useState({
-    Comments:"",
-    ID:"",
-    ProductId:"",
-    billReceipt:"",
-
-  });
+  const [result,setresult] = useState([]);
 
   
   const onSubmit = async()=>{
@@ -46,8 +40,39 @@ export default function OrgPage() {
     
   };
   
+  const queryRecentTransactions = async()=>{
+      for(let i=1;i<3;i++){
+        const fetchs = await fetch(`http://localhost:3000/${Organization}/queries`,{
+          method: 'post',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({
+            org : Organization,
+            AdminID: `${Organization}_Admin`,
+            queryName  : "readBill",
+            ID : `${Organization}_Sony_Bill${i}`
+          })
+        })
+       
+          const data = await fetchs.json();
+          console.log(data);
+          setresult((data));
+
+        //Addded a extra state because when we got json error because of string type we are sending
+        //so if we get error we simply print Id bill don't exists
+
+        //  setresult((JSON.parse(data)));
+      //  if(data == `The Bill ID: ${ID} does not exist`){
+      //     console.log("No more bill exists");
+      //   }else{          
+      //   console.log(data);
+      //   setresult((data));
+      //  }
+      }
+  }
+
   useEffect(()=>{
-    onSubmit();
+    //onSubmit();
+    queryRecentTransactions();
   },[]);
   
   
@@ -69,10 +94,14 @@ export default function OrgPage() {
             </div>
         </div>
         <div id="loginformOrg">
-            <h6>{result.ID}</h6>
+            <h3>Recent Transcations</h3>
+            <p className="Details">{result.ID}</p>
+            <p className="Details">{result.ProductId}</p>
+            <p className="Details">{result.Comments}</p>
+            <p className="Details">{result.billReceipt}</p>
         </div>
         <div className="nav2">
-                <button class="button-62" onClick={()=>navigate('UploadBill')}>Upload Bill</button>
+                <button class="button-6" onClick={()=>navigate('UploadBill')}>Upload Bill</button>
         </div>
         
       </div>

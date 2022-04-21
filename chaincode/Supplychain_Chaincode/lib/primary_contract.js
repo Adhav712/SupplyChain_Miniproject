@@ -78,13 +78,17 @@ class Supplychain_Contract extends Contract {
     async readBill(ctx, ID) {
         const exists = await this.BillExists(ctx, ID);
         if (!exists) {
-            //throw new Error(`The Bill ID :${ID} does not exist`);
-            return(`The Bill ID: ${ID} does not exist`);
+            // throw new Error(`The Bill ID :${ID} does not exist`);
+            // let resu= [{Bill: `The Bill ID :${ID} does not exist`}]
+            //return(JSON.parse(resu));
+            return (`The Bill ID: ${ID} does not exist`);
         }
         const buffer = await ctx.stub.getState(ID);
         const asset = JSON.parse(buffer.toString());
         return asset;
     }
+
+
 }
 
 module.exports = Supplychain_Contract;

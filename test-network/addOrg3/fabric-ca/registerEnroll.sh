@@ -12,7 +12,7 @@ function createOrg5 {
 	export FABRIC_CA_CLIENT_HOME=${PWD}/../organizations/peerOrganizations/org5.example.com/
 
   set -x
-  fabric-ca-client enroll -u https://Retailor_Admin:Retailor_Adminpw@localhost:13054 --caname ca-org5 --tls.certfiles "${PWD}/fabric-ca/org5/tls-cert.pem"
+  fabric-ca-client enroll -u https://Retailer_Admin:Retailer_Adminpw@localhost:13054 --caname ca-org5 --tls.certfiles "${PWD}/fabric-ca/org5/tls-cert.pem"
   { set +x; } 2>/dev/null
 
   echo 'NodeOUs:
@@ -42,7 +42,7 @@ function createOrg5 {
 
   infoln "Registering the org admin"
   set -x
-  fabric-ca-client register --caname ca-org5 --id.name RetailorRetailor_Admin --id.secret Retailor_Adminpw --id.type admin --tls.certfiles "${PWD}/fabric-ca/org5/tls-cert.pem"
+  fabric-ca-client register --caname ca-org5 --id.name RetailerRetailer_Admin --id.secret Retailer_Adminpw --id.type admin --tls.certfiles "${PWD}/fabric-ca/org5/tls-cert.pem"
   { set +x; } 2>/dev/null
 
   infoln "Generating the peer0 msp"
@@ -80,7 +80,7 @@ function createOrg5 {
 
   infoln "Generating the org admin msp"
   set -x
-	fabric-ca-client enroll -u https://RetailorRetailor_Admin:Retailor_Adminpw@localhost:13054 --caname ca-org5 -M "${PWD}/../organizations/peerOrganizations/org5.example.com/users/Admin@org5.example.com/msp" --tls.certfiles "${PWD}/fabric-ca/org5/tls-cert.pem"
+	fabric-ca-client enroll -u https://RetailerRetailer_Admin:Retailer_Adminpw@localhost:13054 --caname ca-org5 -M "${PWD}/../organizations/peerOrganizations/org5.example.com/users/Admin@org5.example.com/msp" --tls.certfiles "${PWD}/fabric-ca/org5/tls-cert.pem"
   { set +x; } 2>/dev/null
 
   cp "${PWD}/../organizations/peerOrganizations/org5.example.com/msp/config.yaml" "${PWD}/../organizations/peerOrganizations/org5.example.com/users/Admin@org5.example.com/msp/config.yaml"

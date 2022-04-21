@@ -14,7 +14,7 @@ html{
   font-size: 100%;
 } */
 
-.button-62 {
+.button-6 {
     background: rgb(34,193,195);
     border: 0;
     border-radius: 12px;
@@ -81,9 +81,9 @@ html{
     width: 95%;
     height: 30%; */
     border: 1px solid red;
-    height: 200px;
-    width: 200px;
-    margin: 100px auto;
+    height: 60%;
+    width: 85%;
+    margin: 4% 10% 2% 8%;
     background-color: #FFFFFF;
     border-radius: 15px;
     border-color: black;

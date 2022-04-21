@@ -17,6 +17,7 @@ export default function Login() {
         <h2 id="headerTitle">Login</h2>
         <div id="drop" class="rows">
           <select onChange={(event) => data = (event.target.value)} >
+          <option value="Owner">SelectedOrg</option>
             <option value="Owner">Owner</option>
             <option value="Producer">Producer</option>
             <option value="Manufacturer">Manufacturer</option>

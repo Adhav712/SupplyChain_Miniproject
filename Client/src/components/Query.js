@@ -26,6 +26,7 @@ export default function Query() {
     const fetchs = await fetch(`http://localhost:3000/${Organization}/queries`,{
       method: 'post',
       headers:{'Content-Type':'application/json'},
+      //headers:{'Content-Type':'text/html'},
       body: JSON.stringify({
         org : Organization,
         AdminID: `${Organization}_Admin`,
@@ -33,16 +34,23 @@ export default function Query() {
         ID : ID
       })
     })
-
+    console.log(fetchs);
+    //const data = await fetchs.toString();
     const data = await fetchs.json();
-    setresult({
-      ID: data.ID,
-      Comments: data.Comments,
-      ProductId: data.ProductId,
-      billReceipt: data.billReceipt
-    });
     console.log(data);
-    console.log(result);
+    if(data == `The Bill ID: ${ID} does not exist`){
+      alert("No such bill exists");
+      console.log("Working");
+    } else {
+      setresult({
+        ID: data.ID,
+        Comments: data.Comments,
+        ProductId: data.ProductId,
+        billReceipt: data.billReceipt
+      });
+      console.log(data);
+      console.log(result);
+    }
   }
   
 
