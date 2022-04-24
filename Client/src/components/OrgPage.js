@@ -16,8 +16,8 @@ export default function OrgPage() {
   
   const onSubmit = async()=>{
     // console.log("result",Organization);
-  //  const fetchs = await fetch(`https://3000-adhav712-supplychainmini-v2xgy2x4yp4.ws-us40.gitpod.io/${Organization}/queries`,{
-    const fetchs = await fetch(`http://localhost:3000/${Organization}/queries`,{
+    const fetchs = await fetch(`https://3000-adhav712-supplychainmin-auk2ectrrub.ws-us41.gitpod.io//${Organization}/queries`,{
+    //const fetchs = await fetch(`http://localhost:3000/${Organization}/queries`,{
       method: 'post',
       headers:{'Content-Type':'application/json'},
       body: JSON.stringify({
@@ -42,7 +42,8 @@ export default function OrgPage() {
   
   const queryRecentTransactions = async()=>{
       for(let i=1;i<3;i++){
-        const fetchs = await fetch(`http://localhost:3000/${Organization}/queries`,{
+        const fetchs = await fetch(`https://3000-adhav712-supplychainmin-auk2ectrrub.ws-us41.gitpod.io/${Organization}/queries`,{
+        //const fetchs = await fetch(`http://localhost:3000/${Organization}/queries`,{
           method: 'post',
           headers:{'Content-Type':'application/json'},
           body: JSON.stringify({
@@ -89,8 +90,8 @@ export default function OrgPage() {
                 <button class="button-62" onClick={()=>navigate('Query')}>Query Bill</button>
             </div>
             <div className="nav">
-                {/* <button class="button-62" ><a href= {`https://8080-adhav712-supplychainmini-v2xgy2x4yp4.ws-us40.gitpod.io/#/`} target="_blank" id="button-62-link">View History</a></button> */}
-                <button class="button-62" ><a href= {`http://localhost:8080/#/`} target="_blank" id="button-62-link">View History</a></button>
+                <button class="button-62" ><a href= {`https://8080-adhav712-supplychainmin-auk2ectrrub.ws-us41.gitpod.io/#/`} target="_blank" id="button-62-link">View History</a></button>
+                {/* <button class="button-62" ><a href= {`http://localhost:8080/#/`} target="_blank" id="button-62-link">View History</a></button> */}
             </div>
         </div>
         <div id="loginformOrg">

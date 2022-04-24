@@ -21,8 +21,8 @@ export default function Login() {
     console.log("result",ProductId);
     console.log("result",billReceipt);
 
-    //const fetchs = await fetch(`https://3000-adhav712-supplychainmini-v2xgy2x4yp4.ws-us40.gitpod.io/${Organization}`,{
-    const fetchs = await fetch(`http://localhost:3000/${Organization}`,{
+    const fetchs = await fetch(`https://3000-adhav712-supplychainmin-auk2ectrrub.ws-us41.gitpod.io/${Organization}`,{
+    //const fetchs = await fetch(`http://localhost:3000/${Organization}`,{
        method: 'post',
        headers:{'Content-Type':'application/json'},
        body: JSON.stringify({
