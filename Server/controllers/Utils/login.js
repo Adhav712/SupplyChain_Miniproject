@@ -11,8 +11,8 @@ let caClient
 let isLoggedIn;
 
 
-exports.DistributorLogin = async (res,req,choose_org,hospid,AdminID,DocID,emailId,password) => {
-    const networkObj =  await network.connectToNetwork(req,res,choose_org,hospid,AdminID);    
+exports.DistributorLogin = async (res,req,choose_org,AdminID,DocID,emailId,password) => {
+    const networkObj =  await network.connectToNetwork(req,res,choose_org,AdminID);    
 
     const auth_check_res =  await network.invoke(networkObj,true,'Admin_readDoctor',DocID);
 
@@ -34,9 +34,9 @@ exports.DistributorLogin = async (res,req,choose_org,hospid,AdminID,DocID,emailI
     }
 }
 
-exports.RetailerLogin = async (res,req,choose_org,hospid,AdminID,PID,emailId,password) => {
+exports.RetailerLogin = async (res,req,choose_org,AdminID,PID,emailId,password) => {
     
-    const networkObj =  await network.connectToNetwork(req,res,choose_org,hospid,AdminID);    
+    const networkObj =  await network.connectToNetwork(req,res,choose_org,AdminID);    
     const auth_check_res =  await network.invoke(networkObj,true,'Admin_readPatient',PID);
 
     //const result =  auth_check_res.toString();
@@ -55,8 +55,8 @@ exports.RetailerLogin = async (res,req,choose_org,hospid,AdminID,PID,emailId,pas
     }
 }
 
-exports.ManufacturerLogin = async (res,req,choose_org,hospid,AdminID,adminid,emailId,password) => {
-    const networkObj =  await network.connectToNetwork(req,res,choose_org,hospid,AdminID);    
+exports.ManufacturerLogin = async (res,req,choose_org,AdminID,adminid,emailId,password) => {
+    const networkObj =  await network.connectToNetwork(req,res,choose_org,AdminID);    
     const auth_check_res =  await network.invoke(networkObj,true,'readAdminDetails',adminid);
 
     //const result =  auth_check_res.toString();

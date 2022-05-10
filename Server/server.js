@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = "3000";
+const port = "3000"; 
 const cors = require('cors');
 
 const adminRoutes = require('./controllers/src/routes.js');
@@ -20,31 +20,32 @@ async function main() {
 
     app.post('/login',async (req,res) => {
 
-        const{login_role,choose_org,hospid,AdminID,Insurance_adminid,PID,DocID,adminid,emailId,password} = req.body
+        const{choose_org,AdminID,PID,DocID,adminid,emailId,password} = req.body
         let isLoggedIn=false;
-        if(choose_org === 'hospital')
-            switch (login_role){
-                case 'admin':
-                    const authentication_admin = auth.adminLogin(res,res,choose_org,hospid,AdminID,adminid,emailId,password);
-                    isLoggedIn = authentication_admin;
-            
+            switch (choose_org){
+                case 'Producer':
+                    const authentication_Producer = auth.ProducerLogin(res,res,choose_org,AdminID,emailId,password);
+                    isLoggedIn = authentication_Producer;
                     break;
-                case 'doctor':
-                    const authentication_doctor = auth.doctorLogin(res,res,choose_org,hospid,AdminID,DocID,emailId,password);
-                    (isLoggedIn = authentication_doctor);
+                case 'Manufacutrer':
+                    const authentication_Manufaucter = auth.ManufacturerLogin(res,res,choose_org,AdminID,DocID,emailId,password);
+                    (isLoggedIn = authentication_Manufaucter);
                     break;   
-                case 'patient':
-                    const authentication_patient = auth.patientLogin(res,res,choose_org,hospid,AdminID,PID,emailId,password);
-                    isLoggedIn = authentication_patient;
+                case 'Distributor':
+                    const authentication_Distributor = auth.DistributorLogin(res,res,choose_org,AdminID,PID,emailId,password);
+                    isLoggedIn = authentication_Distributor;
                     break
-        }else{
-            //Insurance login
-            const authentication_Insurance_admin = auth.InsuranceAdminLogin(req,res,choose_org,adminid,Insurance_adminid,emailId,password);
-            isLoggedIn = authentication_Insurance_admin;
-        }
-        
-        return isLoggedIn;
-    })
+                case 'Owner':
+                    const authentication_Owner = auth.OwnerLogin(res,res,choose_org,AdminID,PID,emailId,password);
+                    isLoggedIn = authentication_Owner;
+                    break
+                case 'Retailer':
+                    const authentication_Retailor = auth.RetailerLogin(res,res,choose_org,AdminID,PID,emailId,password);
+                    isLoggedIn = authentication_Retailor;
+                    break
+                default:
+                    res.status(300).send("Wrong credential");
+    }})
 
     uploadBill = async (req, res, org, AdminID,func) => {
         if(func == "uploadBill"){
