@@ -1,119 +1,226 @@
 
-//const {buildCAClient, registerAndEnrollUser} = require('./Utils/CaUtils.js');
-//const {buildCCPHosp1, buildCCPHosp2, buildWallet, buildCCPHosp3} = require('./Utils/Utils.js');
-//const {Wallets} = require('fabric-network');
-//const walletPath = path.join(__dirname, '../wallet');
 const network = require('./network.js');
 const crypto = require('crypto');
-//const exp = require('constants');
+
 
 let caClient
 let isLoggedIn;
 
 
-exports.DistributorLogin = async (res,req,choose_org,hospid,AdminID,DocID,emailId,password) => {
-    const networkObj =  await network.connectToNetwork(req,res,choose_org,hospid,AdminID);    
+function decrypt_token(data,key,iv) {
+  const decipher = crypto.createDecipheriv('aes-256-cbc', key, iv);
+  const decripted = decipher.update(data, 'hex', 'utf8') + decipher.final('utf8');
+  return decripted;
+}
 
-    const auth_check_res =  await network.invoke(networkObj,true,'Admin_readDoctor',DocID);
+
+
+exports.OwnerLogin = async (res,req,org,AdminID,emailId,password) => {
+    const networkObj =  await network.connectToNetwork(req,res,org,AdminID);    
+
+    const auth_check_res =  await network.invoke(networkObj,true,'readAdminCredentialDetails',emailId);
 
     //const result =  auth_check_res.toString();
     const result =  JSON.parse(auth_check_res);
     const mailId = result.emailId;
-    const en_pass = result.password;
-    const pass = crypto.createHash('sha256').update(password).digest('hex');
+    const encryptedData = result.password;
+    const key = Buffer.from(result.key, 'hex');
+    const iv = Buffer.from(result.iv, 'hex');
+
+    console.log("encrypt",encryptedData);
+    console.log("key",key);
+    console.log("iv",iv);
+
+    const respass = decrypt_token(encryptedData,key,iv);
+       
+    let i=0;
+    let resmailid = "";
+    for(i=0;i<mailId.length;i++){
+        if(mailId[i] == '@'){
+        resmailid = mailId.slice(0,i+15);
+        break;
+       }
+    }
+
+    console.log("resmailid",resmailid);
+    console.log("respass",respass);
     const isLoggedIn = false;
-    if(password == en_pass && emailId == mailId){
+    if(password == respass && mailId == resmailid){
         console.log("Authenticated");
-        await res.status(200).send("authenticated");
-        return (isLoggedIn == true);
+        res.status(201).json("authenticated");
+        return true;
         
     }else{
         console.log("Declined");
-        await res.status(500).send("Check your credentials or Internal server error")
+        await res.status(500).json("Check your credentials or Internal server error");
         return (isLoggedIn == false);
     }
 }
 
-exports.RetailerLogin = async (res,req,choose_org,hospid,AdminID,PID,emailId,password) => {
-    
-    const networkObj =  await network.connectToNetwork(req,res,choose_org,hospid,AdminID);    
-    const auth_check_res =  await network.invoke(networkObj,true,'Admin_readPatient',PID);
+exports.ProducerLogin = async (res,req,org,AdminID,emailId,password) => {
+    const networkObj =  await network.connectToNetwork(req,res,org,AdminID);    
+
+    const auth_check_res =  await network.invoke(networkObj,true,'readAdminCredentialDetails',emailId);
 
     //const result =  auth_check_res.toString();
     const result =  JSON.parse(auth_check_res);
     const mailId = result.emailId;
-    const en_pass = result.password;
-    const pass = crypto.createHash('sha256').update(password).digest('hex');
-    if(password == en_pass && emailId == mailId){
+    const encryptedData = result.password;
+    const key = Buffer.from(result.key, 'hex');
+    const iv = Buffer.from(result.iv, 'hex');
+
+    console.log("encrypt",encryptedData);
+    console.log("key",key);
+    console.log("iv",iv);
+
+    const respass = decrypt_token(encryptedData,key,iv);
+       
+    let i=0;
+    let resmailid = "";
+    for(i=0;i<mailId.length;i++){
+        if(mailId[i] == '@'){
+        resmailid = mailId.slice(0,i+15);
+        break;
+       }
+    }
+
+    console.log("resmailid",resmailid);
+    console.log("respass",respass);
+    const isLoggedIn = false;
+    if(password == respass && mailId == resmailid){
         console.log("Authenticated");
-        await res.status(200).send("authenticated");
-        return true
+        res.status(201).json("authenticated");
+        return true;
+        
     }else{
         console.log("Declined");
-        await res.status(500).send("Check your credentials or Internal server error")
-        return false
+        await res.status(500).json("Check your credentials or Internal server error");
+        return (isLoggedIn == false);
     }
 }
 
-exports.ManufacturerLogin = async (res,req,choose_org,hospid,AdminID,adminid,emailId,password) => {
-    const networkObj =  await network.connectToNetwork(req,res,choose_org,hospid,AdminID);    
-    const auth_check_res =  await network.invoke(networkObj,true,'readAdminDetails',adminid);
+exports.ManufacturerLogin = async (res,req,org,AdminID,emailId,password) => {
+    const networkObj =  await network.connectToNetwork(req,res,org,AdminID);    
+
+    const auth_check_res =  await network.invoke(networkObj,true,'readAdminCredentialDetails',emailId);
 
     //const result =  auth_check_res.toString();
     const result =  JSON.parse(auth_check_res);
     const mailId = result.emailId;
-    const en_pass = result.password;
-    const pass = crypto.createHash('sha256').update(password).digest('hex');
-    if(password == en_pass && emailId == mailId){
+    const encryptedData = result.password;
+    const key = Buffer.from(result.key, 'hex');
+    const iv = Buffer.from(result.iv, 'hex');
+
+    console.log("encrypt",encryptedData);
+    console.log("key",key);
+    console.log("iv",iv);
+
+    const respass = decrypt_token(encryptedData,key,iv);
+       
+    let i=0;
+    let resmailid = "";
+    for(i=0;i<mailId.length;i++){
+        if(mailId[i] == '@'){
+        resmailid = mailId.slice(0,i+15);
+        break;
+       }
+    }
+
+    console.log("resmailid",resmailid);
+    console.log("respass",respass);
+    const isLoggedIn = false;
+    if(password == respass && mailId == resmailid){
         console.log("Authenticated");
-        await res.status(200).send("authenticated");
-        return true
+        res.status(201).json("authenticated");
+        return true;
+        
     }else{
         console.log("Declined");
-        await res.status(500).send("Check your credentials or Internal server error")
-        return false
+        await res.status(500).json("Check your credentials or Internal server error");
+        return (isLoggedIn == false);
     }
-    
 }
 
-exports.ProducerLogin = async (res,req,choose_org,adminid,Insurance_adminid,emailId,password) => {
-    const networkObj =   await network.connectToNetwork(req,res,choose_org,'',Insurance_adminid);    
-    const auth_check_res =  await network.invoke(networkObj,true,'readAdminDetails',adminid);
+exports.DistributorLogin = async (res,req,org,AdminID,emailId,password) => {
+    const networkObj =  await network.connectToNetwork(req,res,org,AdminID);    
+
+    const auth_check_res =  await network.invoke(networkObj,true,'readAdminCredentialDetails',emailId);
 
     //const result =  auth_check_res.toString();
     const result =  JSON.parse(auth_check_res);
     const mailId = result.emailId;
-    const en_pass = result.password;
-    const pass = crypto.createHash('sha256').update(password).digest('hex');
-    if(password == en_pass && emailId == mailId){
+    const encryptedData = result.password;
+    const key = Buffer.from(result.key, 'hex');
+    const iv = Buffer.from(result.iv, 'hex');
+
+    console.log("encrypt",encryptedData);
+    console.log("key",key);
+    console.log("iv",iv);
+
+    const respass = decrypt_token(encryptedData,key,iv);
+       
+    let i=0;
+    let resmailid = "";
+    for(i=0;i<mailId.length;i++){
+        if(mailId[i] == '@'){
+        resmailid = mailId.slice(0,i+15);
+        break;
+       }
+    }
+
+    console.log("resmailid",resmailid);
+    console.log("respass",respass);
+    const isLoggedIn = false;
+    if(password == respass && mailId == resmailid){
         console.log("Authenticated");
-        await res.status(200).send("authenticated");
-        return true
+        res.status(201).json("authenticated");
+        return true;
+        
     }else{
         console.log("Declined");
-        await res.status(500).send("Check your credentials or Internal server error")
-        return false
+        await res.status(500).json("Check your credentials or Internal server error");
+        return (isLoggedIn == false);
     }
-    
 }
 
-exports.OwnerLogin = async (res,req,choose_org,adminid,Insurance_adminid,emailId,password) => {
-    const networkObj =   await network.connectToNetwork(req,res,choose_org,'',Insurance_adminid);    
-    const auth_check_res =  await network.invoke(networkObj,true,'readAdminDetails',adminid);
+exports.RetailerLogin = async (res,req,org,AdminID,emailId,password) => {
+    const networkObj =  await network.connectToNetwork(req,res,org,AdminID);    
+
+    const auth_check_res =  await network.invoke(networkObj,true,'readAdminCredentialDetails',emailId);
 
     //const result =  auth_check_res.toString();
     const result =  JSON.parse(auth_check_res);
     const mailId = result.emailId;
-    const en_pass = result.password;
-    const pass = crypto.createHash('sha256').update(password).digest('hex');
-    if(password == en_pass && emailId == mailId){
+    const encryptedData = result.password;
+    const key = Buffer.from(result.key, 'hex');
+    const iv = Buffer.from(result.iv, 'hex');
+
+    console.log("encrypt",encryptedData);
+    console.log("key",key);
+    console.log("iv",iv);
+
+    const respass = decrypt_token(encryptedData,key,iv);
+       
+    let i=0;
+    let resmailid = "";
+    for(i=0;i<mailId.length;i++){
+        if(mailId[i] == '@'){
+        resmailid = mailId.slice(0,i+15);
+        break;
+       }
+    }
+
+    console.log("resmailid",resmailid);
+    console.log("respass",respass);
+    const isLoggedIn = false;
+    if(password == respass && mailId == resmailid){
         console.log("Authenticated");
-        await res.status(200).send("authenticated");
-        return true
+        res.status(201).json("authenticated");
+        return true;
+        
     }else{
         console.log("Declined");
-        await res.status(500).send("Check your credentials or Internal server error")
-        return false
+        await res.status(500).json("Check your credentials or Internal server error");
+        return (isLoggedIn == false);
     }
-    
 }

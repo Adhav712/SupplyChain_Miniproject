@@ -10,6 +10,7 @@
 const stringify  = require('json-stringify-deterministic');
 const sortKeysRecursive  = require('sort-keys-recursive');
 const { Contract } = require('fabric-contract-api');
+let initCredential = require('./Credential_List.json');
     
 class Supplychain_Contract extends Contract {
 
@@ -49,6 +50,16 @@ class Supplychain_Contract extends Contract {
             // when retrieving data, in any lang, the order of data will be the same and consequently also the corresonding hash
             await ctx.stub.putState(bill.ID, Buffer.from(stringify(sortKeysRecursive(bill))));
         }
+
+        console.info('============= START : Initialize Credential Ledger ===========');
+        const credential_list = initCredential;
+        for (let i = 0; i < credential_list.length; i++) {
+            credential_list[i].docType = 'credential_list';
+            await ctx.stub.putState(credential_list[i].emailId+credential_list[i].org, Buffer.from(JSON.stringify(credential_list[i])));
+            console.info('Added <--> ', credential_list[i]);
+        }
+        console.info('============= END : Initialize Credential Ledger ===========');
+
     }
 
     // CreateAsset issues a new asset to the world state with given details.
@@ -84,6 +95,22 @@ class Supplychain_Contract extends Contract {
             return (`The Bill ID: ${ID} does not exist`);
         }
         const buffer = await ctx.stub.getState(ID);
+        const asset = JSON.parse(buffer.toString());
+        return asset;
+    }
+
+
+    async AdminCredentialDetailsExists(ctx, adminId) {
+        const buffer = await ctx.stub.getState(adminId);
+        return (!!buffer && buffer.length > 0);
+    }
+
+    async readAdminCredentialDetails(ctx, adminId) {
+        const exists = await this.AdminCredentialDetailsExists(ctx, adminId);
+        if (!exists) {
+            throw new Error(`The patient ${adminId} does not exist`);
+        }
+        const buffer = await ctx.stub.getState(adminId);
         const asset = JSON.parse(buffer.toString());
         return asset;
     }

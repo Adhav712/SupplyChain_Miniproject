@@ -16,10 +16,10 @@ exports.uploadBill = async (req, res, org, AdminID) => {
         const uploadBillRes = await networkObj.contract.submitTransaction('UploadBill', ID, ProductId, Comments, billReceipt);
         // Invoke the smart contract function
         if (uploadBillRes.error) {
-            res.status(400).send(response.error);
+            res.status(400).json(response.error);
           }
   console.log(`Bill is Uploaded by ${ID} the result is ${uploadBillRes.toString()}`);          
-  res.status(201).send(`${prettyJSONString(uploadBillRes)}`);
+  res.status(201).json(`${prettyJSONString(uploadBillRes)}`);
 };
 
 //------------------------Admin Query Transcations-----------------------
@@ -34,14 +34,14 @@ exports.AdminBill_query = async(req,res,org,AdminID) => {
       await networkObj.gateway.disconnect();
   
       if (response.error) {
-        res.status(400).send(response.error);
+        res.status(400).json(response.error);
       }
       console.log(`Transaction has been evaluated, result is: ${response.toString()}`);
       
       if(response.toString() == `The Bill ID: ${ID} does not exist`){
-        res.status(201).send(response.toString());
+        res.status(201).json(response.toString());
       }else{
-        res.status(201).send(`${prettyJSONString(response)}`);
+        res.status(201).json(`${prettyJSONString(response)}`);
       }
       
       
@@ -51,7 +51,7 @@ exports.AdminBill_query = async(req,res,org,AdminID) => {
         // const response = await networkObj.contract.evaluateTransaction(queryName, args);
         //  const result_toString = response.toString()
         //  await networkObj.gateway.disconnect();
-         res.status(300).send("Retry wrong transction Triggered!");
+         res.status(300).json("Retry wrong transction Triggered!");
     }
     
 

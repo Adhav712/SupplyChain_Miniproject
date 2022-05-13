@@ -22,8 +22,8 @@ export default function Query() {
 
   const onSubmitquery = async()=>{
     // console.log("result",Organization);
-   const fetchs = await fetch(`https://3000-adhav712-supplychainmin-auk2ectrrub.ws-us41.gitpod.io/${Organization}/queries`,{
-   // const fetchs = await fetch(`http://localhost:3000/${Organization}/queries`,{
+   //const fetchs = await fetch(`https://3000-adhav712-supplychainmin-auk2ectrrub.ws-us41.gitpod.io/${Organization}/queries`,{
+   const fetchs = await fetch(`http://localhost:3000/${Organization}/queries`,{
       method: 'post',
       headers:{'Content-Type':'application/json'},
       //headers:{'Content-Type':'text/html'},

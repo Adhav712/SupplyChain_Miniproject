@@ -174,7 +174,10 @@ html{
     
 }
 
-
+.RecentTranscations{
+  display: flex;
+  margin-left: 41%;
+}
 
 
 
