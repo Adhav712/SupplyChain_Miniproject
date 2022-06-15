@@ -34,11 +34,12 @@ export default function Query() {
         ID : ID
       })
     })
-    console.log(fetchs);
-    //const data = await fetchs.toString();
-    const data = await fetchs.json();
-    console.log(data);
-    if(data == `The Bill ID: ${ID} does not exist`){
+    //console.log(fetchs);
+    const datas = await fetchs.json();
+    // console.log(datas);
+    // console.log(JSON.parse(datas));
+    const data = JSON.parse(datas);
+    if(data === `The Bill ID: ${ID} does not exist`){
       alert("No such bill exists");
       console.log("Working");
     } else {
@@ -48,8 +49,6 @@ export default function Query() {
         ProductId: data.ProductId,
         billReceipt: data.billReceipt
       });
-      console.log(data);
-      console.log(result);
     }
   }
   
@@ -59,7 +58,7 @@ export default function Query() {
       <div className="general">
         <div id="loginform">
           <div className="nav">
-            <button class="button-62" onClick={()=>navigate('/')}>Log Out</button>
+            <button className="button-62" onClick={()=>navigate('/')}>Log Out</button>
           </div>
             <h2 id="headerTitle">Query Bills</h2>
             <div className="divide">
@@ -71,8 +70,8 @@ export default function Query() {
                       setID(e.target.value)
                   }/> 
                 </div>
-                <div class="top"> 
-                    <button class="submit" onClick={onSubmitquery}>Submit</button>
+                <div className="top"> 
+                    <button className="submit" onClick={onSubmitquery}>Submit</button>
                 </div>
                 <div>
             </div>

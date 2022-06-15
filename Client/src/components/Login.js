@@ -8,37 +8,46 @@ import Trushchain from "../assets/Trushchain.png";
 export default function Login() {
   let navigate = useNavigate();
 
-  const SelectedOrg = useStore((state) => state.SelectedOrg);
-  const Checkauth = useStore((state) => state.Checkauth);
+ // const SelectedOrg = useStore((state) => state.SelectedOrg);
+ const Checkauth = useStore((state) => state.Checkauth);
   const auth = useStore(state => state.isLoggedIn);
   let data;
   
-  
-  const Organization = useStore(state => state.org);
+  const [SelectedOrg,setSelectedOrg] = useState(" ");
+//  const [Checkauth,setCheckauth] = useState("false");
+  //const Organization = useStore(state => state.org);
   const [mailid,setmailid] = useState("");
   const [password,setpassword] = useState("");
   
-  const LoginCheck = async()=>{
+  const LoginCheck = async(SelectedOrg)=>{
       //const fetchs = await fetch(`https://3000-adhav712-supplychainmin-auk2ectrrub.ws-us41.gitpod.io/$login`,{
       const fetchs = await fetch(`http://localhost:3000/login`,{
         method: 'post',
         headers:{'Content-Type':'application/json'},
         body: JSON.stringify({
-          choose_org : Organization,
-          AdminID: `${Organization}_Admin`,
-          emailId  : mailid+Organization,
+          choose_org : SelectedOrg,
+          AdminID: `${SelectedOrg}_Admin`,
+          emailId  : mailid+SelectedOrg,
           password : password
         })
       })
-     
-        const data = await fetchs.json();
+      
+      try{
+        data = await fetchs.json();
         console.log(data);
-        Checkauth(data);
-        console.log("auth"  ,auth);
-        if(auth == 'authenticated'){
-          navigate('OrgPage');
-          console.log("authenticated");
+        if(data.authenticated === "true"){
+          navigate('/OrgPage');
+          Checkauth(data.authenticated);
+          console.log("auth"  ,auth);
+
+        }else{
+          alert("Wrong EmailId or Password");
         }
+      }catch(error){
+        console.log(error);
+        alert(`Error: ${error}`);
+        window.location.reload();
+      }     
 }
 
 
@@ -49,11 +58,11 @@ export default function Login() {
   return(
       
       <div className="general">
-      <image className="logo" src={Trushchain} />
+      
       <div id="loginform1">
         <h2 id="headerTitle">TrustChain</h2>
-        <div id="drop" class="rows">
-          <select onChange={(event) => data = (event.target.value)} >
+        <div id="drop" className="rows">
+          <select onChange={(event) => data = setSelectedOrg(event.target.value)} >
           <option value="Owner">SelectedOrg</option>
             <option value="Owner">Owner</option>
             <option value="Producer">Producer</option>
@@ -64,12 +73,14 @@ export default function Login() {
         </div>
         <div className="row"><input type="email" placeholder="Enter your email" onChange={  e => setmailid(e.target.value)}/> </div>
         <div className="row"><input type="password" placeholder="Enter your password" onChange = {e => setpassword(e.target.value)}/> </div>
-          <div  id="button" class="row"> 
+          <div  id="button" className="row"> 
             <button 
             onClick={() => {
-              SelectedOrg(data)
-              console.log("data",data)
-              LoginCheck()
+              // const dataselect = data;
+              // setSelectedOrg(data)
+              console.log("NS",SelectedOrg);
+              console.log("data",data);
+              LoginCheck(SelectedOrg)
             }}>Login</button>
           </div>
         

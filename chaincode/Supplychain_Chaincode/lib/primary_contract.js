@@ -92,7 +92,7 @@ class Supplychain_Contract extends Contract {
             // throw new Error(`The Bill ID :${ID} does not exist`);
             // let resu= [{Bill: `The Bill ID :${ID} does not exist`}]
             //return(JSON.parse(resu));
-            return (`The Bill ID: ${ID} does not exist`);
+            return JSON.parse(`The Bill ID: ${ID} does not exist`);
         }
         const buffer = await ctx.stub.getState(ID);
         const asset = JSON.parse(buffer.toString());
@@ -108,7 +108,8 @@ class Supplychain_Contract extends Contract {
     async readAdminCredentialDetails(ctx, adminId) {
         const exists = await this.AdminCredentialDetailsExists(ctx, adminId);
         if (!exists) {
-            throw new Error(`The patient ${adminId} does not exist`);
+            throw new Error(`The credential ${adminId} does not exist`);
+            //return (`The credential ${adminId} does not exist`);
         }
         const buffer = await ctx.stub.getState(adminId);
         const asset = JSON.parse(buffer.toString());

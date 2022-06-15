@@ -3,10 +3,13 @@ const app = express();
 const port = "3000";
 const cors = require('cors');
 
+
+
 const adminRoutes = require('./controllers/src/routes.js');
 
 
 const auth = require('./controllers/Utils/login.js');
+
 
 
 async function main() {
@@ -28,7 +31,7 @@ async function main() {
                     isLoggedIn = authentication_Producer;
                     break;
                 case 'Manufacutrer':
-                    const authentication_Manufacutrer = auth.ManufacutrerLogin(res,res,choose_org,AdminID,emailId,password);
+                    const authentication_Manufacutrer = auth.ManufacturerLogin(res,res,choose_org,AdminID,emailId,password);
                     isLoggedIn = authentication_Manufacutrer;
                     break;   
                 case 'Distributor':

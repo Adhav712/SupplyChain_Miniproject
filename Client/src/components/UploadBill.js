@@ -36,7 +36,8 @@ export default function Login() {
        })
      })
  
-     const data = await fetchs.json();
+     const datas = await fetchs.json();
+     const data = JSON.parse(datas);
      if (data.ID === ID) {
         alert("Bill Uploaded Successfully"); 
      }else{

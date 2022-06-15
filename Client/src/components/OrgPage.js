@@ -7,6 +7,7 @@ export default function OrgPage() {
   let navigate = useNavigate();
     
   const Organization = useStore(state => state.org);
+  const auth = useStore(state => state.isLoggedIn);
 
   
 
@@ -71,10 +72,10 @@ export default function OrgPage() {
       }
   }
 
-  useEffect(()=>{
-    //onSubmit();
-    queryRecentTransactions();
-  },[]);
+  // useEffect(()=>{
+  //   //onSubmit();
+  //   queryRecentTransactions();
+  // },[]);
   
   
   return(
@@ -85,6 +86,7 @@ export default function OrgPage() {
             <button class="button-62" onClick={()=>navigate('/')}>Log Out</button>
         </div>
         <h2 id="headerTitle">Organization Page</h2>
+        <h2 id="headerTitle">isLoggedIn : {auth}</h2>
         <div class="nav1">
             <div className="nav">
                 <button class="button-62" onClick={()=>navigate('Query')}>Query Bill</button>
