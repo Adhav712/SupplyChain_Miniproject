@@ -1,5 +1,65 @@
 [//]: # (SPDX-License-Identifier: CC-BY-4.0)
 
+Step1. To Step-up Blockchain 
+			
+    Before running the network make sure all the docker containers are down for that use the commands
+
+    ./network.sh down
+
+    docker volume prune -f
+
+    docker system prune -f
+
+
+    Run the Docker Container which is each individual hyperledger fabric peer
+    Create a channel with certificate authorities and run up the CouchDB instance
+
+    ./network.sh up createChannel -ca -s couchdb
+
+      cd addOrg3
+
+      ./addOrg3.sh up -ca -s couchdb
+
+    cd ..
+
+    ./network.sh deployCC -ccn Supplychain_Contract -ccv 1 -cci InitLedger -ccp ../chaincode/Supplychain_Chaincode -ccl javascript
+
+      cd ../Server/controllers/wallet
+
+      rm *.id
+ 
+Step2. Setting up Backend Server
+
+    We cannot able to directly interact with blockchain for that we using Hyperledger fabric Nodejs Sdk 
+    Go to the Server Folder and run this command.
+
+      npm start
+      
+Step3. Running Frontend Client
+
+    We cannot able to directly interact with blockchain for that we using Hyperledger fabric Nodejs Sdk 
+
+    Go to the Server Folder and run this command.
+
+      npm start
+
+
+Step4. Querying Bills
+
+    Once everything is up and running, now we can query the pre-uploaded Bill by entering the Product id 
+
+
+Step5. Uploading Bills
+
+    If any organization want to upload their bill by doing this
+
+Step6. Checking History of bills
+
+    To check which all are transactions happened on the network by using a framework like Hyperledger explorer
+
+
+
+
 # Hyperledger Fabric Samples
 
 [![Build Status](https://dev.azure.com/Hyperledger/Fabric-Samples/_apis/build/status/Fabric-Samples?branchName=main)](https://dev.azure.com/Hyperledger/Fabric-Samples/_build/latest?definitionId=28&branchName=main)
