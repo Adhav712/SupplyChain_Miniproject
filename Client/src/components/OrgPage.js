@@ -90,23 +90,18 @@ export default function OrgPage() {
   return(
       
       <div className="general">
-      <div id="loginform">
+      <div id="loginform_orgFull">
         <div className="nav">
+            
+            <button className="button-62" onClick={()=>navigate('Query')}>Query Bill</button>
+            <button className="button-62" ><a href= {`http://localhost:8080/#/`} target="_blank" id="button-62-link">View History</a></button>
             <button className="button-62" onClick={()=>navigate('/')}>Log Out</button>
         </div>
         <h2 id="headerTitle" >Organization Page</h2>
         <p style={{display:"flex" , justifyContent:"center"}}>isLoggedIn : {auth}</p>
         <p style={{display:"flex" , justifyContent:"center"}}>Organization : {Organization}</p>
-        <div class="nav1">
-            <div className="nav">
-                <button className="button-62" onClick={()=>navigate('Query')}>Query Bill</button>
-            </div>
-            <div className="nav">
-                {/* <button class="button-62" ><a href= {`https://8080-adhav712-supplychainmin-auk2ectrrub.ws-us41.gitpod.io/#/`} target="_blank" id="button-62-link">View History</a></button> */}
-                <button className="button-62" ><a href= {`http://localhost:8080/#/`} target="_blank" id="button-62-link">View History</a></button>
-            </div>
-        </div>
-        <div id="loginform">
+        
+        <div id="loginform_Org">
             <h3>Recent Transcations</h3>
             <p className="Details">{result.ID}</p>
             <p className="Details">{result.ProductId}</p>

@@ -13,6 +13,63 @@ body{
 html{
   font-size: 100%;
 } */
+/* ----------------------------------------- */
+.container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.material-textfield {
+  position: relative;  
+}
+
+label {
+  position: absolute;
+  font-size: 1rem;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  color: gray;
+  padding: 0 0.3rem;
+  margin: 0 30px 0 35px;
+  transition: .1s ease-out;
+  transform-origin: left top;
+  pointer-events: none;
+  border-radius: 5px;
+}
+input {
+  font-size: 1rem;
+  outline: none;
+  border: 1px solid gray;
+  border-radius: 5px;  
+  padding: 1rem 0.7rem;
+  color: rgb(37, 35, 35);
+  transition: 0.1s ease-out;
+  background-color: rgb(255,255,255,0.2);
+  box-shadow: 0px 5px 15px rgb(0 0 0 / 50%);
+  border-radius: 6px;
+  padding-right: 70px;
+  margin: 20px;
+  
+}
+input:focus {
+  border-color: #6200EE;  
+}
+input:focus + label {
+  color: #6200EE;
+  top: 23%;
+  transform: translateY(-50%) scale(.9);
+}
+input:not(:placeholder-shown) + label {
+  top: 0;
+  transform: translateY(-50%) scale(.9);
+}
+
+
+/* ------------------------------------------------- */
 
 
 .button-62 {
@@ -50,15 +107,16 @@ html{
     padding-right: 5px;
 }
  
-#loginform{
+#loginform_query{
     max-width: 65%;
     min-width: 57%;
     max-height: 100%;
     width: 95%;
-    height: 70%;
+    height: 90%;
     margin: 100px auto;
-    background-color: #FFFFFF;
+    background-color: rgb(255,255,255,0.5);
     border-radius: 15px;
+    box-shadow: 0px 5px 15px rgb(0 0 0 / 50%);
   } 
 /*
 #loginform{
@@ -80,7 +138,7 @@ html{
   font-size: 2rem;
 }
 
-.row{
+.row_Query{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -89,7 +147,7 @@ html{
   
 }
 
-.row input{
+.row_Query input{
   width:70%;
   box-sizing: border-box;
 	border: none;
@@ -98,36 +156,43 @@ html{
   padding-bottom: 1rem;
   box-shadow: inset 0px -3px 0px 0px rgba(187,187,187,0.2);
   transition: box-shadow 0.2s ease-in;
+  background-color: rgb(255,255,255,0.2);
+  box-shadow: 0px 5px 15px rgb(0 0 0 / 50%);
+  border-radius: 6px;
+  
 }
 
-.row input:focus{
+
+.row_Query input:focus{
    box-shadow: inset 0px -3px 0px 0px rgba(34,193,195,0.7);
    outline: none;
+   box-shadow: 0px 5px 15px rgb(0 0 0 / 50%);
+   border-radius: 6px;
 }
 
-.row input::-webkit-input-placeholder{
+.row_Query input::-webkit-input-placeholder{
   opacity: 1;
   transition: opacity 0.25s ease-out;
 }
 
-.row input:hover::-webkit-input-placeholder,
-.row input:focus::-webkit-input-placeholder{
+.row_Query input:hover::-webkit-input-placeholder,
+.row_Query input:focus::-webkit-input-placeholder{
   opacity: 0;
 }
 
-.row label{
+.row_Query label{
   align-self: start;
   padding-left: 4.5rem;
   padding-bottom: 0.5rem;
   color: rgba(187,187,187,0.9);
 }
 
-.row button{
+.row_Query button{
   border-radius: 25px;
   width: 100%;
   height: 60px;
   font-size: 1rem;
-  color: white;
+  color: rgb(80, 80, 80);
   font-weight: 400;
   background: rgb(34,193,195);
   /* background: linear-gradient(90deg, rgba(34,193,195,1) 0%,     rgba(253,187,45,1) 100%); */
@@ -165,7 +230,7 @@ html{
   height: 40px;
 }
 
-.row button:hover{
+.row_Query button:hover{
   opacity: 0.8;
 }
 
@@ -177,6 +242,8 @@ html{
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: baseline;
+    
 }
 
 .Display_query_result{

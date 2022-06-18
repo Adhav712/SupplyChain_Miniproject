@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 // import {OrgContext} from "./Login";
 import useStore from "./store";
+import 'tw-elements';
 
 
 export default function Query() {
@@ -56,19 +57,25 @@ export default function Query() {
   return(
       
       <div className="general">
-        <div id="loginform">
+        <div id="loginform_query">
           <div className="nav">
             <button className="button-62" onClick={()=>navigate('/')}>Log Out</button>
           </div>
             <h2 id="headerTitle">Query Bills</h2>
             <div className="divide">
-                <div className="row">
+                {/* <div className="row_Query">
                   <input 
                     type="text" 
                     placeholder="Enter ID" 
                     onChange={  e => 
                       setID(e.target.value)
                   }/> 
+                </div> */}
+                <div class="container">
+                  <div class="material-textfield">
+                    <input placeholder=" " type="text" />
+                    <label>Enter ID</label>
+                  </div>
                 </div>
                 <div className="top"> 
                     <button className="submit" onClick={onSubmitquery}>Submit</button>
