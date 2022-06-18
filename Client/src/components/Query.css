@@ -49,7 +49,7 @@ html{
     padding-top: 5px;
     padding-right: 5px;
 }
-
+ 
 #loginform{
     max-width: 65%;
     min-width: 57%;
@@ -59,9 +59,9 @@ html{
     margin: 100px auto;
     background-color: #FFFFFF;
     border-radius: 15px;
-  }
-
-/* #loginform{
+  } 
+/*
+#loginform{
   max-width: 35%;
   min-width: 20%;
   max-height: 100%;

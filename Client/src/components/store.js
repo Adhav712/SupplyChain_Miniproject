@@ -2,7 +2,7 @@ import create from 'zustand';
 import {devtools } from "zustand/middleware";
 
 let store = (set) => ({
-    org: 'Owner',
+   org: 'Owner',
    Checkauth: (isLoggedIn) => set({ isLoggedIn }),    
     // Checkauth: (isLoggedIn) =>{
     //     set((state) => ({

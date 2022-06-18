@@ -30,22 +30,28 @@ exports.AdminBill_query = async(req,res,org,AdminID) => {
     const networkObj = await network.connectToNetwork(req,res,org,AdminID);
 
     if(queryName == "BillExists" || queryName == "readBill"){
-      const response = await networkObj.contract.evaluateTransaction(queryName, ID);
-      await networkObj.gateway.disconnect();
-  
-      if (response.error) {
-        res.status(400).json(response.error);
+      try{  
+        const response = await networkObj.contract.evaluateTransaction(queryName, ID);
+        await networkObj.gateway.disconnect();
+    
+        if (response.error) {
+          res.status(400).json(response.error);
+        }
+        console.log(`Transaction has been evaluated, result is: ${response.toString()}`);
+        
+        if(response.toString() == `The Bill ID: ${ID} does not exist`){
+          res.status(201).json(response.toString());
+        }else{
+          res.status(201).json(`${prettyJSONString(response)}`);
+        }
+        
+        
+        return response
+
+      }catch{
+        res.status(400).json("Error in query");
       }
-      console.log(`Transaction has been evaluated, result is: ${response.toString()}`);
       
-      if(response.toString() == `The Bill ID: ${ID} does not exist`){
-        res.status(201).json(response.toString());
-      }else{
-        res.status(201).json(`${prettyJSONString(response)}`);
-      }
-      
-      
-      return response
 
     }else{
         // const response = await networkObj.contract.evaluateTransaction(queryName, args);

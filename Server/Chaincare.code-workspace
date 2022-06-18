@@ -1,0 +1,25 @@
+{
+	"folders": [
+		{
+			"path": "../../Chaincare"
+		},
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../fabric-samples"
+		},
+		{
+			"name": "test-network",
+			"path": "../test-network"
+		},
+		{
+			"name": "Testcontract",
+			"path": "../../../../../../../../home/adhav/Desktop/Testcontract"
+		},
+		{
+			"path": "../../../../Web Works/Projects"
+		}
+	],
+	"settings": {}
+}

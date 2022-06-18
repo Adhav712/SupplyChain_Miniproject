@@ -8,14 +8,15 @@ import Trushchain from "../assets/Trushchain.png";
 export default function Login() {
   let navigate = useNavigate();
 
- // const SelectedOrg = useStore((state) => state.SelectedOrg);
+ const SelectedOrg = useStore((state) => state.SelectedOrg);
  const Checkauth = useStore((state) => state.Checkauth);
-  const auth = useStore(state => state.isLoggedIn);
+ const auth = useStore(state => state.isLoggedIn);
+ const org = useStore((state) => state.org);
   let data;
   
-  const [SelectedOrg,setSelectedOrg] = useState(" ");
-//  const [Checkauth,setCheckauth] = useState("false");
-  //const Organization = useStore(state => state.org);
+//const [SelectedOrg,setSelectedOrg] = useState(" ");
+//const [Checkauth,setCheckauth] = useState("false");
+//const Organization = useStore(state => state.org);
   const [mailid,setmailid] = useState("");
   const [password,setpassword] = useState("");
   
@@ -25,9 +26,9 @@ export default function Login() {
         method: 'post',
         headers:{'Content-Type':'application/json'},
         body: JSON.stringify({
-          choose_org : SelectedOrg,
-          AdminID: `${SelectedOrg}_Admin`,
-          emailId  : mailid+SelectedOrg,
+          choose_org : org,
+          AdminID: `${org}_Admin`,
+          emailId  : mailid+org,
           password : password
         })
       })
@@ -51,18 +52,14 @@ export default function Login() {
 }
 
 
-
-
-
-  
   return(
       
       <div className="general">
-      
       <div id="loginform1">
         <h2 id="headerTitle">TrustChain</h2>
+        
         <div id="drop" className="rows">
-          <select onChange={(event) => data = setSelectedOrg(event.target.value)} >
+          <select onChange={(event) => data = SelectedOrg(event.target.value)} >
           <option value="Owner">SelectedOrg</option>
             <option value="Owner">Owner</option>
             <option value="Producer">Producer</option>
@@ -77,7 +74,7 @@ export default function Login() {
             <button 
             onClick={() => {
               // const dataselect = data;
-              // setSelectedOrg(data)
+               //setSelectedOrg(data)
               console.log("NS",SelectedOrg);
               console.log("data",data);
               LoginCheck(SelectedOrg)

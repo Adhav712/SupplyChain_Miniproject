@@ -52,14 +52,18 @@ async function main() {
 
 
     uploadBill = async (req, res, org, AdminID,func) => {
+       try{
         if(func == "uploadBill"){
             adminRoutes.uploadBill(req,res,org,AdminID);
         }else{
             res.status(300).send("Wrong input");
         }
+       }catch{
+              res.status(300).send("Wrong input");
+       }
+        
     }
     //-------------------Producer Routes Starts---------------------
-    
     app.post('/Owner',(req,res) =>{
         const func = req.body.func;
         const org = req.body.org;
