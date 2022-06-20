@@ -58,7 +58,45 @@ exports.AdminBill_query = async(req,res,org,AdminID) => {
         //  const result_toString = response.toString()
         //  await networkObj.gateway.disconnect();
          res.status(300).json("Retry wrong transction Triggered!");
+    }   
+
+}
+
+exports.UserQuery = async(req,res,org,AdminID) => {
+  const {queryName,ProductId} = req.body;
+  const networkObj = await network.connectToNetwork(req,res,org,AdminID);
+
+  if(queryName == "PID_readBill"){
+    try{  
+      const response = await networkObj.contract.evaluateTransaction(queryName, ProductId);
+      await networkObj.gateway.disconnect();
+  
+      if (response.error) {
+        res.status(400).json(response.error);
+      }
+      console.log(`Transaction has been evaluated, result is: ${response.toString()}`);
+      
+      if(response.toString() == `The Product ID: ${ProductId} does not exist`){
+        res.status(201).json(response.toString());
+      }else{
+        res.status(201).json(`${prettyJSONString(response)}`);
+      }
+      
+      
+      return response
+
+    }catch(e){
+      console.log(ProductId);
+      res.status(400).json("Error in query");
+      console.log(e)
     }
     
+
+  }else{
+      // const response = await networkObj.contract.evaluateTransaction(queryName, args);
+      //  const result_toString = response.toString()
+      //  await networkObj.gateway.disconnect();
+       res.status(300).json("Retry wrong transction Triggered!");
+  }
 
 }

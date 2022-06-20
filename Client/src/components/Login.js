@@ -40,7 +40,7 @@ export default function Login() {
           navigate('/OrgPage');
           Checkauth(data.authenticated);
           console.log("auth"  ,auth);
-
+          
         }else{
           alert("Wrong EmailId or Password");
         }
@@ -54,7 +54,7 @@ export default function Login() {
 
   return(
       
-      <div className="general">
+      <div className="general1">
       <div id="loginform1">
         <h2 id="headerTitle">TrustChain</h2>
         

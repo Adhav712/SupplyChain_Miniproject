@@ -3,7 +3,8 @@ import Query from "./components/Query";
 import UploadBill from "./components/UploadBill"
 import { BrowserRouter, Route,Routes } from "react-router-dom";
 import OrgPage from "./components/OrgPage";
-
+import Mainpage from "./components/main";
+import UserQuery from "./components/UserQuery";
 
 
 function App() {
@@ -11,13 +12,13 @@ function App() {
     <BrowserRouter>
       <div>
         <Routes>
-          <Route path="/" element={<Login/>} />
-          <Route path="/:org" element={<OrgPage/>} />
-          <Route path="/:org/Query" element={<Query/>} /> 
-          <Route path="/:org/UploadBill" element={<UploadBill/>} />
-            
+          <Route path="/" element={<Mainpage />} />
+          <Route path="/Login" element={<Login/>} />
+          <Route path="/OrgPage" element={<OrgPage/>} />
+          <Route path="/UserQuery" element={<UserQuery/>} />
+          <Route path="/OrgPage/Query" element={<Query/>} /> 
+          <Route path="/OrgPage/UploadBill" element={<UploadBill/>} />
         </Routes>
-        
       </div>
     </BrowserRouter>
     

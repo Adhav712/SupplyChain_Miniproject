@@ -1,4 +1,4 @@
-import React from "react";
+import {React,Fragment} from "react";
 import "./Query.css";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
@@ -7,32 +7,31 @@ import useStore from "./store";
 import 'tw-elements';
 
 
-export default function Query() {
+export default function UserQuery() {
 
   let navigate = useNavigate();
   const Organization = useStore(state => state.org);
 
   const [ID,setID] = useState("");
-  const [result,setresult] = useState({
+  const [result,setresult] = useState([{
     Comments:"",
     ID:"",
     ProductId:"",
     billReceipt:"",
-
-  });
+}]);
 
   const onSubmitquery = async()=>{
     // console.log("result",Organization);
    //const fetchs = await fetch(`https://3000-adhav712-supplychainmin-auk2ectrrub.ws-us41.gitpod.io/${Organization}/queries`,{
-   const fetchs = await fetch(`http://localhost:3000/${Organization}/queries`,{
+   const fetchs = await fetch(`http://localhost:3000/UserQuery`,{
       method: 'post',
       headers:{'Content-Type':'application/json'},
       //headers:{'Content-Type':'text/html'},
       body: JSON.stringify({
         org : Organization,
         AdminID: `${Organization}_Admin`,
-        queryName  : "readBill",
-        ID : ID
+        queryName  : "PID_readBill",
+        ProductId : ID
       })
     })
     //console.log(fetchs);
@@ -44,15 +43,34 @@ export default function Query() {
       alert("No such bill exists");
       console.log("Working");
     } else {
-      setresult({
-        ID: data.ID,
-        Comments: data.Comments,
-        ProductId: data.ProductId,
-        billReceipt: data.billReceipt
-      });
+      setresult(result =>[...result,data]);
     }
   }
   
+  const renderItems = () => {
+    
+
+    const mapRows = result.map((item, index) => (
+        <Fragment key={item.ID}>
+            <div>
+                {/* Passing unique value to 'key' prop, eases process for virtual DOM to remove specific element and update HTML tree  */}
+                <p id="ID">ID: {item.ID}</p>
+                <p id="ProductId">ProductId: {item.ProductId}</p>
+                <p id="Comments">Comments: {item.Comments}</p>
+                <div style={{display:"flex" ,justifyContent:"flex-start"}}>
+                    <span>billReceipt: </span><a href={item.billReceipt} target="_blank" id="billReceipt">{item.billReceipt}</a>
+                </div>
+                {/* <span>Name : {item.name}</span>
+                <span>User Type: {item.user_type}</span>
+                <button onClick={() => this.deleteUser(item.id)}>
+                    Delete User
+                </button> */}
+            </div>
+        </Fragment>
+    ));
+    return mapRows;
+};
+
 
   return(
       
@@ -71,8 +89,8 @@ export default function Query() {
                       setID(e.target.value)
                   }/> 
                 </div> */}
-                <div class="container">
-                  <div class="material-textfield">
+                <div className="container">
+                  <div className="material-textfield">
                     <input id= "input_query"  placeholder=" " type="text"  onChange={  e =>  setID(e.target.value)}/>
                     <label id = "label_Query">Enter ID</label>
                   </div>
@@ -84,14 +102,15 @@ export default function Query() {
             </div>
             </div>
             <div className="Display_query_result">
-              <p id="ID">ID: {result.ID}</p>
+              {/* <p id="ID">ID: {result.ID}</p>
               <p id="ProductId">ProductId: {result.ProductId}</p>
               <p id="Comments">Comments: {result.Comments}</p>
-              {/* <p id="billReceipt">billReceipt: {result.billReceipt}</p> */}
               <div style={{display:"flex" ,justifyContent:"flex-start"}}>
                 <span>billReceipt: </span><a href={result.billReceipt} target="_blank" id="billReceipt">{result.billReceipt}</a>
-              </div>
-              
+              </div> */}
+              <ul>
+                {renderItems()}
+              </ul>
             </div>
             {/* <div className="display_billReceipt">
                   <p>Alternative text - include a link <a href= {result.billReceipt} target="_blank">to the PDF!</a></p>

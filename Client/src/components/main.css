@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:600|Work+Sans:400,500,600,700&display=swap');
+
+.Landing-page{
+    /* width: 1043px;
+    height: 937px; */
+    width: auto;
+    height: auto;
+    background-color: rgb(255,255,255);
+}
+li,ul{
+     list-style-type: none;
+}
+li{
+    /* width: 42px;
+    height: 24px; */
+    
+    /* font-family: 'Poppins';
+    font-style: normal; */
+    /* font-weight: 500; */
+    /* font-size: 14px;
+    line-height: 24px; */
+    /* identical to box height, or 171% */
+    
+    color: #000000;
+}
+
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+/* .TrustchainLogo{
+    width: 50%;
+} */
+
+.left-section{
+    padding-top: 1.5%;
+    width: 70%;
+}
+
+.nav-left{
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-evenly; 
+    align-items: center;
+}
+
+.right-section{  
+    padding-top: 1.5%;
+    width: 30%;
+}
+
+.nav-right{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.btnsjoin{
+
+
+/* Auto layout */
+
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+padding:1px 14px;
+height: 36px;
+/* 11 Text Color/Light/01 Text Primary */
+
+background: #212B36;
+border-radius: 8px;
+
+/* Inside auto layout */
+
+flex: none;
+order: 4;
+flex-grow: 0;
+color: white;
+font-family: 'Poppins', sans-serif;
+font-style: normal;
+font-weight: 600;
+}
+
+
+
+/*------------------------------*/
+
+.Mid-section{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1.5%;
+    padding-bottom: 1.5%;
+}
+
+/* .mid-section-hed{
+    display: flex;
+    flex-direction: row;
+} */
+
+.Mid-section-left{
+   margin-left: 10%;
+   margin-bottom: 10%;
+   
+}
+
+.Mid-sec_hed1{
+    width: 60%;
+    font-family: 'Barlow', sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 58px;
+}
+
+.Mid-sec_hed2{
+    color: rgba(250, 84, 28, 1);
+    font-family: 'Barlow', sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 68px;
+}
+
+.Mid-sec-subsec1{
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    color: #637381;
+    width: 60%;
+}
+
+.Mid-sec-subsec2{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 23px;
+    gap: 10px;
+    margin-top: 5%;
+
+
+    width: 15%;
+    height: 5%;
+
+    background: #212B36;
+    border-radius: 8px;
+
+    flex: none;
+    order: 2;
+    flex-grow: 0;
+    cursor: pointer;
+}
+
+.Mid-sec-subsec2-buttontext{
+    width: 117px;
+    height: 26px;
+
+    /* 01 ButtonText/01 Large */
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 26px;
+    /* identical to box height, or 173% */
+
+
+    /* 08 Common/01 White */
+
+    color: #FFFFFF;
+
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+#Mid-sec-subsec2-icon{
+    width: 22px;
+    height: 22px;
+    
+    
+}

@@ -6,7 +6,7 @@ body{
   font-family: "work sans";
 }
 .general{
-  height: 690px;
+  height: 837px;
   font-family: "work sans";
 }
 /* 
@@ -25,7 +25,7 @@ html{
   position: relative;  
 }
 
-label {
+#label_Query{
   position: absolute;
   font-size: 1rem;
   left: 0;
@@ -40,7 +40,7 @@ label {
   pointer-events: none;
   border-radius: 5px;
 }
-input {
+#input_query  {
   font-size: 1rem;
   outline: none;
   border: 1px solid gray;
@@ -54,16 +54,16 @@ input {
   padding-right: 70px;
   margin: 20px;
   
-}
-input:focus {
+} 
+#input_query:focus {
   border-color: #6200EE;  
 }
-input:focus + label {
+#input_query:focus + #label_Query {
   color: #6200EE;
   top: 23%;
   transform: translateY(-50%) scale(.9);
 }
-input:not(:placeholder-shown) + label {
+#input_query:not(:placeholder-shown) + #label_Query {
   top: 0;
   transform: translateY(-50%) scale(.9);
 }
@@ -274,7 +274,7 @@ input:not(:placeholder-shown) + label {
   flex-direction: column;
   align-items: flex-start;
   /* padding-top: 1rem; */
-  padding-left: 1rem;
+  /* padding-left: 1rem; */
   /* max-width: 100%; */
   /* padding-right: 7rem; */
   /* min-width: %; */

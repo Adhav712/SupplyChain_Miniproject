@@ -1,15 +1,18 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:600|Work+Sans:400,500,600,700&display=swap');
 
 body{
-  background: rgb(34,193,195);
-  background: linear-gradient(135deg, rgba(34,193,195,1) 0%,     rgba(253,187,45,1) 100%);
-  font-family: "work sans";
-}
-.general{
-  height: 690px;
-  font-family: "work sans";
+  background: #2a2a2a;
+  /* background: linear-gradient(135deg, rgba(34,193,195,1) 0%,     rgba(253,187,45,1) 100%); */
   
+  font-family: "work sans";
 }
+.general1{
+  height: 837px;
+  font-family: "work sans";
+}
+@viewport {
+  width: device-width;
+  }
 /* 
 html{
   font-size: 100%;
@@ -62,8 +65,11 @@ html{
   font-size: 1.3rem;
   padding-left: 1.5rem;
   padding-bottom: 1rem;
-  box-shadow: inset 0px -3px 0px 0px rgba(187,187,187,0.2);
+  /* box-shadow: inset 0px -3px 0px 0px rgba(187,187,187,0.2); */
   transition: box-shadow 0.2s ease-in;
+  background-color: rgb(255,255,255,0.2);
+  box-shadow: 0px 5px 15px rgb(0 0 0 / 50%);
+  border-radius: 6px;
 }
 
 .row input:focus{

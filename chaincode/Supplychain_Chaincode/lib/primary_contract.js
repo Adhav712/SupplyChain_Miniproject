@@ -20,26 +20,44 @@ class Supplychain_Contract extends Contract {
                 ID: "Producer_Samsung_Bill1", 
                 ProductId:"Sony_Xperia_XZ2",
                 Comments : "Display",
-                billReceipt: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.aJB-CvRfUH13gpdPTCY7IQHaEK%26pid%3DApi&f=1',
+                billReceipt: 'https://cdn.corporatefinanceinstitute.com/assets/invoice-template-word1.png',
             },
             {
                 ID: "Producer_Sony_Bill1",
                 ProductId:"Sony_Xperia_XZ2",  
                 Comments : "Camera_Module",
-                billReceipt: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.TSHmDzushvy52VdllZvPMgHaEK%26pid%3DApi&f=1',
+                billReceipt: 'https://www.zoho.com/invoice/images/invoice-templates/excel-invoice-template/excel-ss.png',
+            },
+            {
+                ID: "Producer_Sony_Bill2",
+                ProductId:"Sony_Xperia_XZ2",  
+                Comments : "battery_Module",
+                billReceipt: 'https://i.pinimg.com/originals/12/a7/e9/12a7e946c0514511afca491f7c56a86a.png',
             },
             {
                 ID: "Producer_Qualcomn_Bill1",
                 ProductId:"Sony_Xperia_XZ2",  
                 Comments : "Soc",
-                billReceipt: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.TSHmDzushvy52VdllZvPMgHaEK%26pid%3DApi&f=1',
+                billReceipt: 'https://i1.wp.com/eforms.com/images/2016/10/invoice-template-pdf-1.png?fit=2550%2C3301&ssl=1',
             },
             {
                 ID: "Manufacturer_Foxcom_Bill1",
                 ProductId:"Sony_Xperia_XZ2",  
                 Comments : "Total Cost of manufacturing",
-                billReceipt: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.TSHmDzushvy52VdllZvPMgHaEK%26pid%3DApi&f=1',
-            },          
+                billReceipt: 'https://www.invoicesimple.com/wp-content/uploads/2018/06/Invoice-Template-top.png',
+            },
+            {
+                ID: "Distributor_Amazon_Bill1",
+                ProductId:"Sony_Xperia_XZ2",  
+                Comments : "Whole Sale Price",
+                billReceipt: 'https://images.ctfassets.net/7rifqg28wcbd/4IjVHnLpCT5YVfQfCTdeAW/7327997d78eadeddf9c4df3cc70ffe31/Sample_Invoice_Template_by_PayPal.jpg',
+            },
+            {
+                ID: "Retailor_Poorvika_Bill1",
+                ProductId:"Sony_Xperia_XZ2",  
+                Comments : "Retail Price",
+                billReceipt: 'hhttps://invoicetemplates.com/wp-content/uploads/Hospital-Bill-Invoice-Template.png',
+            }          
         ];
 
         for (const bill of bills) {
@@ -95,6 +113,24 @@ class Supplychain_Contract extends Contract {
             return JSON.parse(`The Bill ID: ${ID} does not exist`);
         }
         const buffer = await ctx.stub.getState(ID);
+        const asset = JSON.parse(buffer.toString());
+        return asset;
+    }
+
+    async PID_BillExists(ctx, ProductId) {
+        const billJSON = await ctx.stub.getState(ProductId[0]);
+        return billJSON && billJSON.length > 0;
+    }
+
+    async PID_readBill(ctx, ProductId) {
+        const exists = await this.PID_BillExists(ctx, ProductId);
+        if (!exists) {
+            // throw new Error(`The Bill ID :${ID} does not exist`);
+            // let resu= [{Bill: `The Bill ID :${ID} does not exist`}]
+            //return(JSON.parse(resu));
+            return JSON.parse(`The Bill ID: ${ProductId} does not exist`);
+        }
+        const buffer = await ctx.stub.getState(ProductId);
         const asset = JSON.parse(buffer.toString());
         return asset;
     }

@@ -140,6 +140,14 @@ async function main() {
         console.log("Queried result:",result);
     })
 
+    app.post('/UserQuery', (req,res) => {
+        const org = req.body.org;
+        const AdminID = req.body.AdminID;
+
+        const result = adminRoutes.UserQuery(req,res,org,AdminID)
+        console.log("Queried result:",result);
+    })
+
     //-------------------Producer Routes Ends---------------------
 
 

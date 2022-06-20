@@ -103,10 +103,13 @@ export default function OrgPage() {
         
         <div id="loginform_Org">
             <h3>Recent Transcations</h3>
-            <p className="Details">{result.ID}</p>
-            <p className="Details">{result.ProductId}</p>
-            <p className="Details">{result.Comments}</p>
-            <p className="Details">{result.billReceipt}</p>
+            <p className="Details">ID: {result.ID}</p>
+            <p className="Details">ProductId: {result.ProductId}</p>
+            <p className="Details">Comments: {result.Comments}</p>
+            <div style={{display:"flex" ,justifyContent:"flex-start"}}>
+                <span>billReceipt: </span><a href={result.billReceipt} target="_blank" className="Details">{result.billReceipt}</a>
+            </div>
+              
         </div>
         <div className="nav2">
                 <button className="button-6" onClick={()=>navigate('UploadBill')}>Upload Bill</button>
