@@ -1,7 +1,7 @@
 {
-    "name": "supplychain_contract",
+    "name": "HyperBaseAuth",
     "version": "1.0.0",
-    "description": "supplychain contract implemented in JavaScript",
+    "description": "HyperBaseAuth contract implemented in JavaScript",
     "main": "index.js",
     "engines": {
         "node": ">=12",

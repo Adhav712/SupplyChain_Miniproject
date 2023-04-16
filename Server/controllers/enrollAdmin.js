@@ -18,21 +18,21 @@ const Owner= 'Owner_Admin';
 const OwnerPasswd = 'Owner_Adminpw';
 const OwnerMSP = 'Org1MSP';
 
-const Producer= 'Producer_Admin';
-const ProducerPasswd = 'Producer_Adminpw';
-const ProducerMSP = 'Org2MSP';
+// const Producer= 'Producer_Admin';
+// const ProducerPasswd = 'Producer_Adminpw';
+// const ProducerMSP = 'Org2MSP';
 
-const Manufacturer = 'Manufacturer_Admin';
-const ManufacturerPasswd = 'Manufacturer_Adminpw';
-const ManufacturerMSP = 'Org3MSP';
+// const Manufacturer = 'Manufacturer_Admin';
+// const ManufacturerPasswd = 'Manufacturer_Adminpw';
+// const ManufacturerMSP = 'Org3MSP';
 
-const Distributor = 'Distributor_Admin';
-const DistributorPasswd = 'Distributor_Adminpw';
-const DistributorMSP = 'Org4MSP';
+// const Distributor = 'Distributor_Admin';
+// const DistributorPasswd = 'Distributor_Adminpw';
+// const DistributorMSP = 'Org4MSP';
 
-const Retailer = 'Retailer_Admin';
-const RetailerPasswd = 'Retailer_Adminpw';
-const RetailerMSP = 'Org5MSP';
+// const Retailer = 'Retailer_Admin';
+// const RetailerPasswd = 'Retailer_Adminpw';
+// const RetailerMSP = 'Org5MSP';
 
 exports.enrollAdminOrg1 = async function() {
   try {
@@ -57,90 +57,90 @@ exports.enrollAdminOrg1 = async function() {
 };
 
 
-exports.enrollAdminOrg2 = async function() {
-    try {
-      // build an in memory object with the network configuration (also known as a connection profile)
-      const ccp = buildCCPOrg2();
+// exports.enrollAdminOrg2 = async function() {
+//     try {
+//       // build an in memory object with the network configuration (also known as a connection profile)
+//       const ccp = buildCCPOrg2();
   
-      // build an instance of the fabric ca services client based on
-      // the information in the network configuration
-      const caClient = buildCAClient(FabricCAServices, ccp, 'ca.org2.example.com');
+//       // build an instance of the fabric ca services client based on
+//       // the information in the network configuration
+//       const caClient = buildCAClient(FabricCAServices, ccp, 'ca.org2.example.com');
   
-      // setup the wallet to hold the credentials of the application user
-      const wallet = await buildWallet(Wallets, walletPath);
+//       // setup the wallet to hold the credentials of the application user
+//       const wallet = await buildWallet(Wallets, walletPath);
   
-      // to be executed and only once per hospital. Which enrolls admin and creates admin in the wallet
-      await enrollAdmin(caClient, wallet, ProducerMSP, Producer, ProducerPasswd);
+//       // to be executed and only once per hospital. Which enrolls admin and creates admin in the wallet
+//       await enrollAdmin(caClient, wallet, ProducerMSP, Producer, ProducerPasswd);
   
-      console.log('msg: Successfully enrolled admin user ' + Producer + ' and imported it into the wallet');
-    } catch (error) {
-      console.error(`Failed to enroll admin user ' + ${Producer} + : ${error}`);
-      process.exit(1);
-    }
-  };
+//       console.log('msg: Successfully enrolled admin user ' + Producer + ' and imported it into the wallet');
+//     } catch (error) {
+//       console.error(`Failed to enroll admin user ' + ${Producer} + : ${error}`);
+//       process.exit(1);
+//     }
+//   };
 
-  exports.enrollAdminOrg3 = async function() {
-    try {
-      // build an in memory object with the network configuration (also known as a connection profile)
-      const ccp = buildCCPOrg3();
+//   exports.enrollAdminOrg3 = async function() {
+//     try {
+//       // build an in memory object with the network configuration (also known as a connection profile)
+//       const ccp = buildCCPOrg3();
   
-      // build an instance of the fabric ca services client based on
-      // the information in the network configuration
-      const caClient = buildCAClient(FabricCAServices, ccp, 'ca.org3.example.com');
+//       // build an instance of the fabric ca services client based on
+//       // the information in the network configuration
+//       const caClient = buildCAClient(FabricCAServices, ccp, 'ca.org3.example.com');
   
-      // setup the wallet to hold the credentials of the application user
-      const wallet = await buildWallet(Wallets, walletPath);
+//       // setup the wallet to hold the credentials of the application user
+//       const wallet = await buildWallet(Wallets, walletPath);
   
-      // to be executed and only once per hospital. Which enrolls admin and creates admin in the wallet
-      await enrollAdmin(caClient, wallet, ManufacturerMSP, Manufacturer, ManufacturerPasswd);
+//       // to be executed and only once per hospital. Which enrolls admin and creates admin in the wallet
+//       await enrollAdmin(caClient, wallet, ManufacturerMSP, Manufacturer, ManufacturerPasswd);
   
-      console.log('msg: Successfully enrolled admin user ' + Manufacturer + ' and imported it into the wallet');
-    } catch (error) {
-      console.error(`Failed to enroll admin user ' + ${Manufacturer} + : ${error}`);
-      process.exit(1);
-    }
-  }; 
+//       console.log('msg: Successfully enrolled admin user ' + Manufacturer + ' and imported it into the wallet');
+//     } catch (error) {
+//       console.error(`Failed to enroll admin user ' + ${Manufacturer} + : ${error}`);
+//       process.exit(1);
+//     }
+//   }; 
 
-  exports.enrollAdminOrg4 = async function() {
-    try {
-      // build an in memory object with the network configuration (also known as a connection profile)
-      const ccp = buildCCPOrg4();
+//   exports.enrollAdminOrg4 = async function() {
+//     try {
+//       // build an in memory object with the network configuration (also known as a connection profile)
+//       const ccp = buildCCPOrg4();
   
-      // build an instance of the fabric ca services client based on
-      // the information in the network configuration
-      const caClient = buildCAClient(FabricCAServices, ccp, 'ca.org4.example.com');
+//       // build an instance of the fabric ca services client based on
+//       // the information in the network configuration
+//       const caClient = buildCAClient(FabricCAServices, ccp, 'ca.org4.example.com');
   
-      // setup the wallet to hold the credentials of the application user
-      const wallet = await buildWallet(Wallets, walletPath);
+//       // setup the wallet to hold the credentials of the application user
+//       const wallet = await buildWallet(Wallets, walletPath);
   
-      // to be executed and only once per hospital. Which enrolls admin and creates admin in the wallet
-      await enrollAdmin(caClient, wallet, DistributorMSP, Distributor, DistributorPasswd);
+//       // to be executed and only once per hospital. Which enrolls admin and creates admin in the wallet
+//       await enrollAdmin(caClient, wallet, DistributorMSP, Distributor, DistributorPasswd);
   
-      console.log('msg: Successfully enrolled admin user ' + Distributor + ' and imported it into the wallet');
-    } catch (error) {
-      console.error(`Failed to enroll admin user ' + ${Distributor} + : ${error}`);
-      process.exit(1);
-    }
-  };
+//       console.log('msg: Successfully enrolled admin user ' + Distributor + ' and imported it into the wallet');
+//     } catch (error) {
+//       console.error(`Failed to enroll admin user ' + ${Distributor} + : ${error}`);
+//       process.exit(1);
+//     }
+//   };
 
-  exports.enrollAdminOrg5 = async function() {
-    try {
-      // build an in memory object with the network configuration (also known as a connection profile)
-      const ccp = buildCCPOrg5();
+//   exports.enrollAdminOrg5 = async function() {
+//     try {
+//       // build an in memory object with the network configuration (also known as a connection profile)
+//       const ccp = buildCCPOrg5();
   
-      // build an instance of the fabric ca services client based on
-      // the information in the network configuration
-      const caClient = buildCAClient(FabricCAServices, ccp, 'ca.org5.example.com');
+//       // build an instance of the fabric ca services client based on
+//       // the information in the network configuration
+//       const caClient = buildCAClient(FabricCAServices, ccp, 'ca.org5.example.com');
   
-      // setup the wallet to hold the credentials of the application user
-      const wallet = await buildWallet(Wallets, walletPath);
+//       // setup the wallet to hold the credentials of the application user
+//       const wallet = await buildWallet(Wallets, walletPath);
   
-      // to be executed and only once per hospital. Which enrolls admin and creates admin in the wallet
-      await enrollAdmin(caClient, wallet, RetailerMSP, Retailer, RetailerPasswd);
+//       // to be executed and only once per hospital. Which enrolls admin and creates admin in the wallet
+//       await enrollAdmin(caClient, wallet, RetailerMSP, Retailer, RetailerPasswd);
   
-      console.log('msg: Successfully enrolled admin user ' + Retailer + ' and imported it into the wallet');
-    } catch (error) {
-      console.error(`Failed to enroll admin user ' + ${Retailer} + : ${error}`);
-      process.exit(1);
-    }
-  };
+//       console.log('msg: Successfully enrolled admin user ' + Retailer + ' and imported it into the wallet');
+//     } catch (error) {
+//       console.error(`Failed to enroll admin user ' + ${Retailer} + : ${error}`);
+//       process.exit(1);
+//     }
+//   };

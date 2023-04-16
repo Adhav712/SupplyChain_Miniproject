@@ -32,29 +32,29 @@ function generatejwttoken(res,req,emailId,org){
 const logic = async (res,req,org,AdminID,emailId,password) => {
     const networkObj =  await network.connectToNetwork(req,res,org,AdminID);    
 
-    const auth_check_res =  await network.invoke(networkObj,true,'readAdminCredentialDetails',emailId);
+    const auth_check_res =  await network.invoke(networkObj,true,'authenticateUser',emailId);
 
     //const result =  auth_check_res.toString();
     try {
         const result =  JSON.parse(auth_check_res);
         
-    const mailId = result.emailId;
-    const encryptedData = result.password;
-    const key = Buffer.from(result.key, 'hex');
-    const iv = Buffer.from(result.iv, 'hex');
+        const mailId = result.emailId;
+        const encryptedData = result.password;
+        const key = Buffer.from(result.key, 'hex');
+        const iv = Buffer.from(result.iv, 'hex');
 
-    console.log("encrypt",encryptedData);
-    console.log("key",key);
-    console.log("iv",iv);
+        console.log("encrypt",encryptedData);
+        console.log("key",key);
+        console.log("iv",iv);
 
-    const respass = decrypt_token(encryptedData,key,iv);
-       
-    let i=0;
-    let resmailid = "";
-    for(i=0;i<mailId.length;i++){
-        if(mailId[i] == '@'){
-        resmailid = mailId.slice(0,i+15);
-        break;
+        const respass = decrypt_token(encryptedData,key,iv);
+        
+        let i=0;
+        let resmailid = "";
+        for(i=0;i<mailId.length;i++){
+            if(mailId[i] == '@'){
+            resmailid = mailId.slice(0,i+15);
+            break;
        }
     }
 
@@ -87,8 +87,6 @@ const logic = async (res,req,org,AdminID,emailId,password) => {
 
 exports.OwnerLogin = async (res,req,org,AdminID,emailId,password) => {
     logic(res,req,org,AdminID,emailId,password);
-
-    
 }
 
 exports.ProducerLogin = async (res,req,org,AdminID,emailId,password) => {

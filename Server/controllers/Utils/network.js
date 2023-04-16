@@ -6,7 +6,7 @@
  const {buildCCPHosp3, buildCCPHosp2, buildCCPHosp1, buildWallet} = require('./Utils.js');
  
  const channelName = 'mychannel';
- const chaincodeName = 'Supplychain_Contract';
+ const chaincodeName = 'HyperBaseAuth';
  const mspOrg1 = 'Org1MSP';
  const mspOrg2 = 'Org2MSP';
  const mspOrg3 = 'Org3MSP';

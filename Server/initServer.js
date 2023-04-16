@@ -103,10 +103,10 @@ const path = require('path');
 
 async function main(){
     await enrollAdmin.enrollAdminOrg1();
-    await enrollAdmin.enrollAdminOrg2();
-    await enrollAdmin.enrollAdminOrg3();
-    await enrollAdmin.enrollAdminOrg4();
-    await enrollAdmin.enrollAdminOrg5();
+    // await enrollAdmin.enrollAdminOrg2();
+    // await enrollAdmin.enrollAdminOrg3();
+    // await enrollAdmin.enrollAdminOrg4();
+    // await enrollAdmin.enrollAdminOrg5();
     // await enrollInsurance1AdminUser();
     // await initpatientLedger();
     // await initdoctorLedger();

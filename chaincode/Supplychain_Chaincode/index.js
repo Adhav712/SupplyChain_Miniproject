@@ -6,7 +6,7 @@
 
 'use strict';
 
-const Supplychain_Contract = require('./lib/primary_contract');
+const HyperBaseAuth = require('./lib/primary_contract');
 
-module.exports.Supplychain_Contract = Supplychain_Contract;
-module.exports.contracts = [ Supplychain_Contract ];
+module.exports.HyperBaseAuth = HyperBaseAuth;
+module.exports.contracts = [ HyperBaseAuth ];
