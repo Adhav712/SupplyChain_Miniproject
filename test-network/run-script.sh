@@ -19,6 +19,10 @@ cd ../Server/controllers/wallet
 
 rm *.id
 
+cd ../../
+
+npm start
+
 # cd  ../../../Fabric-explorer
 # ${PWD}
 
