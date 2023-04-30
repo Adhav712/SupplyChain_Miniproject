@@ -97,20 +97,20 @@
  
  
 
- exports.invoke = async function(networkObj, isQuery, func, args= '') {
+ exports.invoke = async function(networkObj, isQuery, func, ID, password) {
    try {
      if (isQuery === true) {
-       const response = await networkObj.contract.evaluateTransaction(func, args);
+       const response = await networkObj.contract.evaluateTransaction(func,ID,password);
        const result_toString = response.toString()
        console.log(`Transaction has been evaluated, result is: ${result_toString}`);
        await networkObj.gateway.disconnect();
        return result_toString;
      } else {
-       if (args) {
-         args = JSON.parse(args[0]);
-         args = JSON.stringify(args);
-       }
-       const response = await networkObj.contract.submitTransaction(func, args);
+      //  if (args) {
+      //    args = JSON.parse(args[0]);
+      //    args = JSON.stringify(args);
+      //  }
+       const response = await networkObj.contract.submitTransaction(func,ID,password);
        await networkObj.gateway.disconnect();
        return response;
      }

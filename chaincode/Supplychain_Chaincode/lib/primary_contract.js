@@ -10,6 +10,7 @@
 const stringify = require("json-stringify-deterministic");
 const sortKeysRecursive = require("sort-keys-recursive");
 const { Contract } = require("fabric-contract-api");
+const { count } = require("console");
 // let initCredential = require("./Credential_List.json");
 
 class HyperBaseAuth extends Contract {
@@ -18,32 +19,48 @@ class HyperBaseAuth extends Contract {
             {
                 emailId: "adhavan02@gmail.com",
                 name: "adhavan",
-                orgdetails: "",
-                id: "1",
+                orgDetails: [],
+                channelDetails: {
+                    hyperbase: ["hyperbase"],
+                },
+                smartContracts: {},
+                ID: `hyperbase_adhavan_1`,
                 password: "73994812",
                 type: "super_admin",
             },
             {
                 emailId: "johnsd2709@gmail.com",
                 name: "John",
-                orgdetails: "",
-                id: "2",
+                orgDetails: [],
+                channelDetails: {
+                    hyperbase: ["hyperbase"],
+                },
+                smartContracts: {},
+                ID: `hyperbase_john_2`,
                 password: "123",
                 type: "super_admin",
             },
             {
                 emailId: "kiridharan217dec2001@gmail.com",
                 name: "Kiridharan",
-                orgdetails: "",
-                id: "3",
+                orgDetails: [],
+                channelDetails: {
+                    hyperbase: ["hyperbase"],
+                },
+                smartContracts: {},
+                ID: `hyperbase_kiridharan_3`,
                 password: "123",
                 type: "super_admin",
             },
             {
                 emailId: "raj@gmail.com",
                 name: "raj",
-                orgdetails: "",
-                id: "4",
+                orgDetails: [],
+                channelDetails: {
+                    hyperbase: ["hyperbase"],
+                },
+                smartContracts: {},
+                ID: `hyperbase_raj_4`,
                 password: "123",
                 type: "org_admin",
             },
@@ -56,7 +73,7 @@ class HyperBaseAuth extends Contract {
             // we insert data in alphabetic order using 'json-stringify-deterministic' and 'sort-keys-recursive'
             // when retrieving data, in any lang, the order of data will be the same and consequently also the corresonding hash
             await ctx.stub.putState(
-                user.id,
+                user.ID,
                 Buffer.from(stringify(sortKeysRecursive(user)))
             );
         }
@@ -65,59 +82,89 @@ class HyperBaseAuth extends Contract {
         );
     }
 
-    async registerUser(ctx, emailId, name, orgName, id, password, type) {
-        const userAsBytes = await ctx.stub.getState(id);
+    async registerUser(ctx, emailId, name, password, type) {
+        let counter = 4;
+        let userId = `hyperbase_${name}_${counter + 1}`;
+        const userAsBytes = await ctx.stub.getState(userId);
         if (userAsBytes && userAsBytes.length > 0) {
-            throw new Error(`User with ID ${id} already exists`);
+            return `User with ID ${userId} already exists`;
         }
         const user = {
             emailId,
             name,
-            orgName,
-            id,
+            orgDetails: [],
+            channelDetails: {
+                hyperbase: ["hyperbase"],
+            },
+            smartContracts: {},
+            ID: userId,
             password,
             type,
         };
-        await ctx.stub.putState(id, Buffer.from(JSON.stringify(user)));
+        try {
+            const result = await ctx.stub.putState(
+                userId,
+                Buffer.from(JSON.stringify(user))
+            );
+            if (result) {
+                counter = counter + 1;
+                return `${userId}`;
+            } else {
+                return `User with ID ${userId} failed to register`;
+            }
+        } catch (error) {
+            throw new Error(`User with ID ${userId} already exists`);
+        }
     }
 
-    async authenticateUser(ctx, emailId, password) {
-        const userAsBytes = await ctx.stub.getState(emailId);
+    async authenticateUser(ctx, ID, password) {
+        const userAsBytes = await ctx.stub.getState(ID);
+        console.log(userAsBytes);
         if (!userAsBytes || userAsBytes.length === 0) {
-            throw new Error(`User with ID ${id} does not exist`);
+            throw new Error(`User with ID ${ID} does not exist`);
         }
         const user = JSON.parse(userAsBytes.toString());
-        return user.password === password, user.id;
+        return user.password === password;
     }
 
-    async queryUser(ctx, id) {
-        const userAsBytes = await ctx.stub.getState(id);
+    async queryUser(ctx, ID) {
+        const userAsBytes = await ctx.stub.getState(ID);
         if (!userAsBytes || userAsBytes.length === 0) {
-            throw new Error(`User with ID ${id} does not exist`);
+            throw new Error(`User with ID ${ID} does not exist`);
         }
         const user = JSON.parse(userAsBytes.toString());
         return user;
     }
 
-    async deleteUser(ctx, id) {
-        const userAsBytes = await ctx.stub.getState(id);
+    async deleteUser(ctx, ID) {
+        const userAsBytes = await ctx.stub.getState(ID);
         if (!userAsBytes || userAsBytes.length === 0) {
-            throw new Error(`User with ID ${id} does not exist`);
+            throw new Error(`User with ID ${ID} does not exist`);
         }
-        await ctx.stub.deleteState(id);
+        await ctx.stub.deleteState(ID);
     }
 
-    async updateUser(ctx, id, name, orgName, password, type) {
-        const userAsBytes = await ctx.stub.getState(id);
+    async updateUser(
+        ctx,
+        ID,
+        emailId,
+        name,
+        orgDetails,
+        channelDetails,
+        smartContracts,
+        password,
+        type
+    ) {
+        const userAsBytes = await ctx.stub.getState(ID);
         if (!userAsBytes || userAsBytes.length === 0) {
-            throw new Error(`User with ID ${id} does not exist`);
+            throw new Error(`User with ID ${ID} does not exist`);
         }
         const user = JSON.parse(userAsBytes.toString());
+        if (emailId) {
+            user.emailId = emailId;
+        }
         if (name) {
             user.name = name;
-        }
-        if (orgName) {
-            user.orgName = orgName;
         }
         if (password) {
             user.password = password;
@@ -125,7 +172,67 @@ class HyperBaseAuth extends Contract {
         if (type) {
             user.type = type;
         }
-        await ctx.stub.putState(id, Buffer.from(JSON.stringify(user)));
+        await ctx.stub.putState(ID, Buffer.from(JSON.stringify(user)));
+    }
+
+    async updateorgDetails(ctx, ID, networkName, orgName) {
+        const userAsBytes = await ctx.stub.getState(ID);
+        if (!userAsBytes || userAsBytes.length === 0) {
+            throw new Error(`User with ID ${ID} does not exist`);
+        }
+        let key = networkName;
+        // let orgDetails = { [key]: orgName };
+        const user = JSON.parse(userAsBytes.toString());
+        user.orgDetails.push({ [key]: orgName });
+        // if (orgDetails) {
+        // }
+        await ctx.stub.putState(ID, Buffer.from(JSON.stringify(user)));
+    }
+
+    async updatechannelDetails(
+        ctx,
+        ID,
+        networkName,
+        channelname,
+        addExistingNetwork
+    ) {
+        const userAsBytes = await ctx.stub.getState(ID);
+        if (!userAsBytes || userAsBytes.length === 0) {
+            throw new Error(`User with ID ${ID} does not exist`);
+        }
+        const user = JSON.parse(userAsBytes.toString());
+
+        if (addExistingNetwork === true) {
+            user.channelDetails[`${networkName}`].push(channelname);
+        } else {
+            user.channelDetails[`${networkName}`] = [`${channelname}`];
+        }
+        await ctx.stub.putState(ID, Buffer.from(JSON.stringify(user)));
+    }
+
+    async updatesmartContracts(
+        ctx,
+        ID,
+        networkName,
+        channelname,
+        smartContractName,
+        addExistingChannel
+    ) {
+        const userAsBytes = await ctx.stub.getState(ID);
+        if (!userAsBytes || userAsBytes.length === 0) {
+            throw new Error(`User with ID ${ID} does not exist`);
+        }
+        const user = JSON.parse(userAsBytes.toString());
+        if (addExistingChannel === true) {
+            user.smartContracts[`${networkName}_${channelname}`].push(
+                smartContractName
+            );
+        } else {
+            user.smartContracts[`${networkName}_${channelname}`] = [
+                `${smartContractName}`,
+            ];
+        }
+        await ctx.stub.putState(ID, Buffer.from(JSON.stringify(user)));
     }
 }
 

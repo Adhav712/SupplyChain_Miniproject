@@ -17,7 +17,7 @@ function decrypt_token(data,key,iv) {
 }
 
 
-function generatejwttoken(res,req,emailId,org){
+function generatejwttoken(req,res,emailId,org){
     let payload = {
         emailId: emailId,
         org: org
@@ -29,52 +29,88 @@ function generatejwttoken(res,req,emailId,org){
 }
 
 
-const logic = async (res,req,org,AdminID,emailId,password) => {
-    const networkObj =  await network.connectToNetwork(req,res,org,AdminID);    
+const logic = async (req,res,org,AdminID,ID,password) => {
+    console.log("Inside logic\n");
+    const networkObj =  await network.connectToNetwork(req,res,org,AdminID);
+    let example = {
+        ID: ID,
+        password: password
+    }
+    console.log("example",example);
+    console.log("networkObj\n",JSON.stringify(example));
+    const auth_check_res =  await network.invoke(networkObj,true,'authenticateUser',ID,password);
+    console.log("auth_check_res-42",auth_check_res);
 
-    const auth_check_res =  await network.invoke(networkObj,true,'authenticateUser',emailId);
 
-    //const result =  auth_check_res.toString();
+    const result =  auth_check_res.toString();
     try {
-        const result =  JSON.parse(auth_check_res);
+    //     const result =  JSON.parse(auth_check_res);
         
-        const mailId = result.emailId;
-        const encryptedData = result.password;
-        const key = Buffer.from(result.key, 'hex');
-        const iv = Buffer.from(result.iv, 'hex');
+    //     const mailId = result.emailId;
+    //     const encryptedData = result.password;
+    //     const key = Buffer.from(result.key, 'hex');
+    //     const iv = Buffer.from(result.iv, 'hex');
 
-        console.log("encrypt",encryptedData);
-        console.log("key",key);
-        console.log("iv",iv);
+    //     console.log("encrypt",encryptedData);
+    //     console.log("key",key);
+    //     console.log("iv",iv);
 
-        const respass = decrypt_token(encryptedData,key,iv);
+    //     const respass = decrypt_token(encryptedData,key,iv);
         
-        let i=0;
-        let resmailid = "";
-        for(i=0;i<mailId.length;i++){
-            if(mailId[i] == '@'){
-            resmailid = mailId.slice(0,i+15);
-            break;
-       }
-    }
+    //     let i=0;
+    //     let resmailid = "";
+    //     for(i=0;i<mailId.length;i++){
+    //         if(mailId[i] == '@'){
+    //         resmailid = mailId.slice(0,i+15);
+    //         break;
+    //    }
+    // }
 
-    console.log("resmailid",resmailid);
-    console.log("respass",respass);
+    // console.log("resmailid",resmailid);
+    // console.log("respass",respass);
+    // const isLoggedIn = false;
+    // if(password == respass && mailId == resmailid){
+    //     console.log("Authenticated");
+    //     const accesstoken = generatejwttoken(req,res,emailId,org)
+    //     res.status(201).json({
+    //         authenticated : "true",
+    //         AccessToken : accesstoken  
+    //     });
+    //     return true;
+        
+    // const result =  JSON.parse(auth_check_res);
+    // const resmailId = result.emailId;
+    // const respassword = result.password;
+    console.log("result",auth_check_res);
+    const result =  JSON.parse(auth_check_res);
+    console.log("result",result);
     const isLoggedIn = false;
-    if(password == respass && mailId == resmailid){
-        console.log("Authenticated");
-        const accesstoken = generatejwttoken(req,res,emailId,org)
-        res.status(201).json({
-            authenticated : "true",
-            AccessToken : accesstoken  
-        });
-        return true;
-        
-    }else{
-        console.log("Declined");
-        await res.status(500).json("Check your credentials or Internal server error");
-        return (isLoggedIn == false);
-    }
+    if(result == true){
+            console.log("Authenticated");
+            const accesstoken = generatejwttoken(req,res,ID,password)
+            res.status(201).json({
+                authenticated : "true",
+                AccessToken : accesstoken  
+            });
+            return true;
+        }else{
+            console.log("Declined");
+            await res.status(500).json("Check your credentials or Internal server error");
+            return (isLoggedIn == false);
+        }
+        // if(password == respassword && resmailId == emailId){
+        //     console.log("Authenticated");
+        //     const accesstoken = generatejwttoken(req,res,emailId,org)
+        //     res.status(201).json({
+        //         authenticated : "true",
+        //         AccessToken : accesstoken  
+        //     });
+        //     return true;
+        // }else{
+        //     console.log("Declined");
+        //     await res.status(500).json("Check your credentials or Internal server error");
+        //     return (isLoggedIn == false);
+        // }
 
 
     } catch (error) {

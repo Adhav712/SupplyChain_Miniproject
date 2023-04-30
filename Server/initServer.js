@@ -4,8 +4,13 @@ const enrollAdmin = require('./controllers/enrollAdmin.js');
 //const FabricCAServices = require('fabric-ca-client');
 //const { Wallets } = require('fabric-network');
 const path = require('path');
+const network = require('./controllers/Utils/network.js');
 
-
+// async function InitLedger() {
+//     const networkObj =  await network.connectToNetwork('req','res','Owner','Owner_Admin');
+//     const auth_check_res =  await network.invoke(networkObj,false,'InitLedger','');
+//     console.log(auth_check_res);
+// }
 // async function initpatientLedger() {
 //     const jsonString = fs.readFileSync('../chaincode/chaincare-contract/lib/initpatientLedger.json');
 //     const patients = JSON.parse(jsonString);
@@ -110,6 +115,7 @@ async function main(){
     // await enrollInsurance1AdminUser();
     // await initpatientLedger();
     // await initdoctorLedger();
+    // await InitLedger();
 }
 
 main();
