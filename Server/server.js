@@ -43,7 +43,7 @@ async function main() {
   //                 isLoggedIn = authentication_Retailer;
   //                 break
   //             default:
-  //                 res.status(300).send("Wrong credential");
+  //                 res.status(300).send("Wrong credentia");
   // }})
 
   app.post("/login", async (req, res) => {
