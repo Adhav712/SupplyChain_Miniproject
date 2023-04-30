@@ -21,6 +21,8 @@ rm *.id
 
 cd ../../
 
+npm i 
+
 npm start
 
 # cd  ../../../Fabric-explorer
